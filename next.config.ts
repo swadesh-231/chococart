@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      // Product images uploaded through the admin panel.
+      { protocol: "https", hostname: "ik.imagekit.io" },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -6,6 +6,41 @@ export interface Product {
     price: number;
     /** One of `PRODUCT_CATEGORIES`; read through `categoryLabel` to display. */
     category: string;
+    /** The tasting detail the shop filters on. All nullable — a chocolate added
+     *  through the admin form before these existed still lists fine. */
+    cocoaPercent?: number | null;
+    flavourNotes?: string[] | null;
+    origin?: string | null;
+    weightGrams?: number | null;
+    vegan?: boolean;
+    glutenFree?: boolean;
+}
+
+/** How the shop narrows the catalogue. Mirrors `GET /api/products`' params. */
+export interface ProductQuery {
+    q?: string;
+    category?: string;
+    /** Any-of, not all-of: ticking Fruity and Nutty widens the shelf. */
+    notes?: string[];
+    minCocoa?: number;
+    maxCocoa?: number;
+    vegan?: boolean;
+    glutenFree?: boolean;
+    sort?: string;
+    limit?: number;
+    offset?: number;
+}
+
+/**
+ * One page of the catalogue. The endpoint has always returned this shape; the
+ * client used to declare it as a bare `Product[]`, which an unchecked cast let
+ * through the compiler and blew up as `.filter is not a function` at runtime.
+ */
+export interface ProductPage {
+    items: Product[];
+    total: number;
+    /** Null means that was the last page — the client stops asking. */
+    nextOffset: number | null;
 }
 
 /** The signed-in customer's own account, as `/api/account/profile` returns it. */

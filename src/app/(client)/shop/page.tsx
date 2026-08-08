@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import { Reveal } from '@/components/motion/reveal';
 import { BrandMark } from '../_components/brand-mark';
+import { filtersFromSearchParams } from './_components/filters';
 import ShopGrid from './_components/shop-grid';
 
 export const metadata: Metadata = {
@@ -10,7 +11,12 @@ export const metadata: Metadata = {
         'Every Chococart bar, tempered in small batches. Choose your flavour and add it to your cart.',
 };
 
-export default function ShopPage() {
+export default async function ShopPage({ searchParams }: PageProps<'/shop'>) {
+    // Resolved here rather than in the grid: a client-side read of the query
+    // string disagrees with what the server rendered, and the mismatch stops
+    // the boundary from ever hydrating.
+    const initialFilters = filtersFromSearchParams(await searchParams);
+
     return (
         <>
             <section className="relative isolate overflow-hidden border-b border-border bg-background">
@@ -27,8 +33,9 @@ export default function ShopPage() {
                                 Crafted to Perfection.
                             </h1>
                             <p className="prose-body mt-7 text-cocoa-600">
-                                Discover our range of artisan chocolates, tempered in small batches
-                                with the world&apos;s finest cacao and nothing artificial.
+                                Every bar we temper, in small batches with the world&apos;s finest
+                                cacao and nothing artificial. Narrow by type, strength or
+                                tasting note.
                             </p>
                         </Reveal>
                     </div>
@@ -47,7 +54,7 @@ export default function ShopPage() {
                 </div>
             </section>
 
-            <ShopGrid />
+            <ShopGrid initialFilters={initialFilters} />
         </>
     );
 }

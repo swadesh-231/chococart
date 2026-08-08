@@ -81,3 +81,62 @@ export async function expireStaleReservations(): Promise<number> {
 
     return stale.length;
 }
+
+/**
+ * How long an expired row is kept after its hold lapsed.
+ *
+ * The shopper stops seeing it immediately — `GET /api/orders/history` filters
+ * expired rows out — so this delay is not about the customer. It is about a
+ * payment that lands late: someone can still have Razorpay open when the window
+ * closes, and `POST /api/payment/verify` needs to find the row to recognise the
+ * order as already released and report that a refund is owed. Delete it on the
+ * second and that late payment becomes an unexplained "Unknown order" with the
+ * money already taken.
+ */
+export const PURGE_AFTER_MINUTES = 30;
+
+/**
+ * Deletes the rows behind holds that lapsed long enough ago to be settled.
+ *
+ * Only `expired` orders qualify. A `failed` one is left alone on purpose:
+ * Razorpay allows another attempt on the same order after a declined payment,
+ * so that row still has to be resolvable when the retry succeeds.
+ *
+ * Stock and riders were already handed back by `releaseOrders`; the updates
+ * below are belt-and-braces for a row released by some other path, and cost
+ * nothing when there is nothing to clear.
+ */
+export async function purgeExpiredOrders(): Promise<number> {
+    const cutoff = new Date(Date.now() - PURGE_AFTER_MINUTES * 60 * 1000);
+
+    const doomed = await db
+        .select({ id: orders.id })
+        .from(orders)
+        .where(and(eq(orders.status, 'expired'), lt(orders.updatedAt, cutoff)));
+
+    if (!doomed.length) return 0;
+
+    const ids = doomed.map((row) => row.id);
+
+    await db.transaction(async (tx) => {
+        await tx.update(inventories).set({ orderId: null }).where(inArray(inventories.orderId, ids));
+        await tx
+            .update(deliveryPersons)
+            .set({ orderId: null })
+            .where(inArray(deliveryPersons.orderId, ids));
+        await tx.delete(orders).where(inArray(orders.id, ids));
+    });
+
+    return ids.length;
+}
+
+/**
+ * The whole lazy housekeeping pass: release what has lapsed, then delete what
+ * lapsed long enough ago. Handlers call this rather than the two separately, so
+ * a new call site cannot pick up half the behaviour.
+ */
+export async function sweepReservations(): Promise<{ expired: number; purged: number }> {
+    const expired = await expireStaleReservations();
+    const purged = await purgeExpiredOrders();
+    return { expired, purged };
+}

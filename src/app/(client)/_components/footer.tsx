@@ -40,9 +40,11 @@ const columns = [
         title: 'Shop',
         links: [
             { label: 'All chocolate', href: '/shop' },
-            { label: 'Dark', href: '/shop' },
-            { label: 'Milk', href: '/shop' },
-            { label: 'Gifting', href: '/shop' },
+            { label: 'Dark', href: '/shop?category=dark' },
+            { label: 'Milk', href: '/shop?category=milk' },
+            { label: 'White', href: '/shop?category=white' },
+            { label: 'Truffles', href: '/shop?category=truffle' },
+            { label: 'Gifting', href: '/shop?category=gift-box' },
         ],
     },
     {

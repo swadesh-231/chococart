@@ -4,6 +4,8 @@ import type {
     MyOrder,
     OrderData,
     Product,
+    ProductPage,
+    ProductQuery,
     Profile,
     VerifyPaymentData,
 } from '@/types';
@@ -67,8 +69,29 @@ async function request<T>(input: string, init?: RequestInit): Promise<T> {
     return payload as T;
 }
 
-export function getProducts() {
-    return request<Product[]>('/api/products');
+/** Serialises a `ProductQuery` into the endpoint's params, omitting anything
+ *  left at its default so the URL (and the query key) stays readable. */
+export function productSearchParams(query: ProductQuery = {}): URLSearchParams {
+    const params = new URLSearchParams();
+
+    if (query.q?.trim()) params.set('q', query.q.trim());
+    if (query.category && query.category !== 'all') params.set('category', query.category);
+    if (query.notes?.length) params.set('notes', query.notes.join(','));
+    if (query.minCocoa !== undefined) params.set('minCocoa', String(query.minCocoa));
+    if (query.maxCocoa !== undefined) params.set('maxCocoa', String(query.maxCocoa));
+    if (query.vegan) params.set('vegan', '1');
+    if (query.glutenFree) params.set('glutenFree', '1');
+    if (query.sort) params.set('sort', query.sort);
+    if (query.limit !== undefined) params.set('limit', String(query.limit));
+    if (query.offset) params.set('offset', String(query.offset));
+
+    return params;
+}
+
+/** One page of the catalogue. Filtering, sorting and paging all happen in
+ *  Postgres, so the browser never has to hold the whole catalogue. */
+export function getProducts(query: ProductQuery = {}) {
+    return request<ProductPage>(`/api/products?${productSearchParams(query)}`);
 }
 
 export function getSingleProduct(id: string) {

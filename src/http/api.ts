@@ -1,4 +1,4 @@
-import { ApiError } from '@/lib/api';
+import { ApiError, productSearchParams } from '@/lib/api';
 import type { ProductApiValues } from '@/lib/validators/productSchema';
 import type {
     DeliveryPerson,
@@ -7,7 +7,8 @@ import type {
     InventoryData,
     Order,
     OrderStatusData,
-    Product,
+    ProductPage,
+    ProductQuery,
     Warehouse,
 } from '@/types';
 
@@ -35,8 +36,8 @@ async function request<T>(input: string, init?: RequestInit): Promise<T> {
     return payload as T;
 }
 
-export function getAllProducts() {
-    return request<Product[]>('/api/products');
+export function getAllProducts(query: ProductQuery = {}) {
+    return request<ProductPage>(`/api/products?${productSearchParams(query)}`);
 }
 
 export function createProduct(data: ProductApiValues) {

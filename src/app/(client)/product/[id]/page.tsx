@@ -23,7 +23,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCheckout } from '@/hooks/use-checkout';
 import { ApiError, getSingleProduct } from '@/lib/api';
 import { productImageSrc } from '@/lib/images';
-import { categoryLabel } from '@/lib/categories';
+import { categoryLabel, noteLabel } from '@/lib/categories';
 import { formatPrice } from '@/lib/utils';
 import { deliverySchema, type DeliveryFormValues } from '@/lib/validators/orderSchema';
 import type { Product } from '@/types';
@@ -37,6 +37,70 @@ const pillars = [
     { icon: Truck, label: 'Ten minutes', copy: 'From the nearest atelier' },
     { icon: Lock, label: 'Secure payment', copy: 'Protected by Razorpay' },
 ];
+
+/**
+ * The tasting card. Every field is nullable — a gift box has no cocoa
+ * percentage and a hand-added product may have none of it — so each row only
+ * appears when there is something to say, and the whole panel disappears
+ * rather than printing a column of dashes.
+ */
+function ProductSpecs({ product }: { product: Product }) {
+    const rows = [
+        product.cocoaPercent ? { label: 'Cocoa', value: `${product.cocoaPercent}%` } : null,
+        product.origin ? { label: 'Origin', value: product.origin } : null,
+        product.weightGrams ? { label: 'Weight', value: `${product.weightGrams} g` } : null,
+    ].filter((row): row is { label: string; value: string } => row !== null);
+
+    const diets = [
+        product.vegan ? 'Vegan' : null,
+        product.glutenFree ? 'Gluten free' : null,
+    ].filter((diet): diet is string => diet !== null);
+
+    const notes = product.flavourNotes ?? [];
+
+    if (!rows.length && !diets.length && !notes.length) return null;
+
+    return (
+        <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-7 sm:grid-cols-3">
+            {rows.map((row) => (
+                <div key={row.label}>
+                    <dt className="eyebrow text-[0.5rem] text-cocoa-500">{row.label}</dt>
+                    <dd className="tnum mt-1.5 font-heading text-xl text-cocoa-800">{row.value}</dd>
+                </div>
+            ))}
+
+            {notes.length > 0 && (
+                <div className="col-span-2 sm:col-span-3">
+                    <dt className="eyebrow text-[0.5rem] text-cocoa-500">Tasting notes</dt>
+                    <dd className="mt-2 flex flex-wrap gap-2">
+                        {notes.map((note) => (
+                            <span
+                                key={note}
+                                className="eyebrow border border-border px-3 py-1.5 text-[0.5rem] text-cocoa-700">
+                                {noteLabel(note)}
+                            </span>
+                        ))}
+                    </dd>
+                </div>
+            )}
+
+            {diets.length > 0 && (
+                <div className="col-span-2 sm:col-span-3">
+                    <dt className="eyebrow text-[0.5rem] text-cocoa-500">Dietary</dt>
+                    <dd className="mt-2 flex flex-wrap gap-2">
+                        {diets.map((diet) => (
+                            <span
+                                key={diet}
+                                className="eyebrow border border-gold/50 bg-gold/8 px-3 py-1.5 text-[0.5rem] text-cocoa-700">
+                                {diet}
+                            </span>
+                        ))}
+                    </dd>
+                </div>
+            )}
+        </dl>
+    );
+}
 
 export default function ProductPage() {
     const params = useParams<{ id: string }>();
@@ -181,6 +245,8 @@ export default function ProductPage() {
                                     {product.description ??
                                         'A small-batch bar, tempered by hand for a clean snap and a long, balanced finish.'}
                                 </p>
+
+                                <ProductSpecs product={product} />
 
                                 <div className="rule-gold mt-8 w-24" />
 

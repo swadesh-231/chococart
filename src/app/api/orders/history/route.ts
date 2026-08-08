@@ -1,16 +1,16 @@
-import { desc, eq } from 'drizzle-orm';
+import { and, desc, eq, ne } from 'drizzle-orm';
 import { db } from '@/db/db';
 import { orders, products } from '@/db/schema/schema';
 import { requireUser } from '@/lib/auth/session';
-import { expireStaleReservations } from '@/lib/orders/group';
+import { sweepReservations } from '@/lib/orders/group';
 
 export async function GET() {
     const appUser = await requireUser();
     if (appUser instanceof Response) return appUser;
 
-    // Sweep before reading so a lapsed hold is shown as expired rather than as
-    // an order the shopper could still pay for.
-    await expireStaleReservations().catch((err) =>
+    // Sweep before reading, so a hold that lapsed while the shopper was away has
+    // already given its stock back and dropped out of the list below.
+    await sweepReservations().catch((err) =>
         console.error('GET /api/orders/history (sweep)', err)
     );
 
@@ -33,7 +33,10 @@ export async function GET() {
             })
             .from(orders)
             .leftJoin(products, eq(orders.productId, products.id))
-            .where(eq(orders.userId, appUser.id))
+            // An expired hold is not an order — nothing was paid and the
+            // chocolate is back on the shelf — so it clears itself out of the
+            // history rather than sitting there as a dead row.
+            .where(and(eq(orders.userId, appUser.id), ne(orders.status, 'expired')))
             .orderBy(desc(orders.id));
 
         return Response.json(myOrders);

@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { db } from '@/db/db';
 import { orders } from '@/db/schema/schema';
 import { requireUser } from '@/lib/auth/session';
-import { expireStaleReservations } from '@/lib/orders/group';
+import { sweepReservations } from '@/lib/orders/group';
 import { millisRemaining } from '@/lib/orders/reservation';
 import {
     APP_ORDER_GROUP_NOTE_KEY,
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
     // Settle any lapsed holds before reading, so an order whose window closed
     // reads as `expired` here rather than looking payable for another moment.
-    await expireStaleReservations().catch((err) =>
+    await sweepReservations().catch((err) =>
         console.error('POST /api/payment/resume (sweep)', err)
     );
 

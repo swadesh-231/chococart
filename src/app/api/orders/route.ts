@@ -3,7 +3,7 @@ import { and, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { db } from '@/db/db';
 import { deliveryPersons, inventories, orders, products, users, warehouses } from '@/db/schema/schema';
 import { requireUser } from '@/lib/auth/session';
-import { expireStaleReservations, releaseOrders } from '@/lib/orders/group';
+import { releaseOrders, sweepReservations } from '@/lib/orders/group';
 import { reservationDeadline } from '@/lib/orders/reservation';
 import {
     APP_ORDER_GROUP_NOTE_KEY,
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
     // Reclaim lapsed holds first — the chocolate this shopper wants may be
     // sitting behind somebody's abandoned checkout.
-    await expireStaleReservations().catch((err) =>
+    await sweepReservations().catch((err) =>
         console.error('POST /api/orders (sweep)', err)
     );
 

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, Lock } from 'lucide-react';
 
 import { Reveal, RevealGroup, RevealItem } from '@/components/motion/reveal';
+import { categoryLabel, PRODUCT_CATEGORIES } from '@/lib/categories';
 import SectionHeading from './section-heading';
 
 /**
@@ -12,18 +13,21 @@ import SectionHeading from './section-heading';
 const families = [
     {
         name: 'Dark',
+        category: 'dark',
         notes: 'Rich · Smooth · Intense',
-        copy: 'Single-origin cacao from 70% to 85%, conched for a long, clean finish.',
+        copy: 'Single-origin cacao from 55% to 90%, conched for a long, clean finish.',
         image: '/assets/1720608785720.jpg',
     },
     {
         name: 'Milk',
+        category: 'milk',
         notes: 'Creamy · Salty · Indulgent',
         copy: 'Slow-churned with sea salt, caramel and toasted hazelnut.',
         image: '/assets/1720707243058.jpg',
     },
     {
         name: 'Gifting',
+        category: 'gift-box',
         notes: 'Exclusive · Seasonal · Unique',
         copy: 'Signature boxes, wrapped by hand and finished with a wax seal.',
         image: '/assets/product1.jpg',
@@ -45,8 +49,8 @@ export default function CollectionTeaser() {
                         }
                     />
                     <p className="prose-body mx-auto mt-6 text-center text-cocoa-600">
-                        Three families, nine bars, one obsession. Sign in to see the full
-                        collection, today&apos;s prices and what is in stock near you.
+                        Five families, one obsession. Sign in to see the full collection,
+                        today&apos;s prices and what is in stock near you.
                     </p>
                 </Reveal>
 
@@ -55,7 +59,9 @@ export default function CollectionTeaser() {
                     className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
                     {families.map((family) => (
                         <RevealItem as="li" key={family.name}>
-                            <Link href="/shop" className="group flex h-full flex-col">
+                            <Link
+                                href={`/shop?category=${family.category}`}
+                                className="group flex h-full flex-col">
                                 <div className="relative aspect-4/5 w-full overflow-hidden bg-ivory-dim">
                                     <Image
                                         src={family.image}
@@ -86,7 +92,22 @@ export default function CollectionTeaser() {
                     ))}
                 </RevealGroup>
 
-                <Reveal delay={0.1} className="mt-16 flex flex-col items-center gap-4">
+                {/* Every type gets a way in, not just the three we photograph. */}
+                <Reveal delay={0.05} className="mt-14">
+                    <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-border pt-8">
+                        {PRODUCT_CATEGORIES.map((category) => (
+                            <li key={category}>
+                                <Link
+                                    href={`/shop?category=${category}`}
+                                    className="eyebrow link-underline text-[0.5625rem] text-cocoa-500 transition-colors hover:text-cocoa-900">
+                                    {categoryLabel(category)}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Reveal>
+
+                <Reveal delay={0.1} className="mt-14 flex flex-col items-center gap-4">
                     <Link
                         href="/shop"
                         className="group inline-flex items-center gap-4 bg-cocoa-800 px-9 py-4 text-ivory transition-colors hover:bg-cocoa-900">

@@ -3,17 +3,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { categoryLabel } from '@/lib/categories';
+import { categoryLabel, noteLabel } from '@/lib/categories';
 import { productImageSrc } from '@/lib/images';
 import { formatPrice } from '@/lib/utils';
 import type { Product } from '@/types';
 import AddToCart from './add-to-cart';
 
 /**
- * Flavour notes are not a column yet, so they're derived from the description —
- * falling back to house notes when there is nothing usable to pull out.
+ * The house notes for a chocolate. `flavourNotes` is the real column, but a row
+ * added through the admin form leaves it empty — so that case falls back to
+ * scraping the description, and then to house notes, rather than showing a gap.
  */
 export function notesFor(product: Product) {
+    if (product.flavourNotes?.length) {
+        return product.flavourNotes.slice(0, 3).map(noteLabel);
+    }
+
     const words = (product.description ?? '')
         .split(/[,.]/)
         .map((part) => part.trim())
@@ -32,25 +37,38 @@ export default function ProductCard({
 }) {
     return (
         <article className="group flex h-full flex-col border border-transparent bg-card transition-shadow duration-500 hover:shadow-e-md">
-            <Link
-                href={`/product/${product.id}`}
-                className="relative aspect-4/5 w-full overflow-hidden bg-ivory-dim"
-                aria-label={product.name}>
-                <Image
-                    src={productImageSrc(product.image)}
-                    alt={product.name}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                />
+            {/* The bag button sits over the photograph rather than inside the
+                link, so adding to the cart never navigates to the product. */}
+            <div className="relative aspect-4/5 w-full overflow-hidden bg-ivory-dim">
+                <Link
+                    href={`/product/${product.id}`}
+                    className="absolute inset-0"
+                    aria-label={product.name}>
+                    <Image
+                        src={productImageSrc(product.image)}
+                        alt={product.name}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                    />
+                </Link>
+
                 {badge && (
-                    <span className="eyebrow absolute top-3 left-3 bg-ivory/95 px-2.5 py-1.5 text-[0.5rem] text-cocoa-800">
+                    <span className="eyebrow pointer-events-none absolute top-3 left-3 bg-ivory/95 px-2.5 py-1.5 text-[0.5rem] text-cocoa-800">
                         {badge}
                     </span>
                 )}
-            </Link>
 
-            <div className="flex flex-1 flex-col items-center px-4 py-6 text-center">
+                {/* z-10 keeps the bag above the full-bleed image link, so a tap
+                    on it always adds rather than opening the product. */}
+                <AddToCart
+                    product={product}
+                    variant="icon"
+                    className="absolute right-3 bottom-3 z-10"
+                />
+            </div>
+
+            <div className="flex flex-1 flex-col items-center px-4 py-5 text-center">
                 <p className="eyebrow mb-2 text-[0.5rem] text-gold">
                     {categoryLabel(product.category)}
                 </p>
@@ -65,11 +83,7 @@ export default function ProductCard({
                     {notesFor(product).join(' · ')}
                 </p>
 
-                <p className="tnum mt-4 text-sm text-cocoa-700">{formatPrice(product.price)}</p>
-
-                <div className="mt-auto pt-5">
-                    <AddToCart product={product} />
-                </div>
+                <p className="tnum mt-3 text-sm text-cocoa-700">{formatPrice(product.price)}</p>
             </div>
         </article>
     );

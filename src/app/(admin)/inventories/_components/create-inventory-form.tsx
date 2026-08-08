@@ -20,12 +20,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Product, Warehouse } from '@/types';
-import { useQuery } from '@tanstack/react-query';
+import { ProductPage, Warehouse } from '@/types';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getAllProducts, getAllWarehouses } from '@/http/api';
 import { inventorySchema } from '@/lib/validators/inventorySchema';
 
 export type FormValues = z.input<typeof inventorySchema>;
+
+/** How many matches the product picker offers before asking you to narrow it. */
+const PRODUCT_PICKER_LIMIT = 50;
 
 const CreateInventoryForm = ({
     onSubmit,
@@ -46,10 +49,24 @@ const CreateInventoryForm = ({
         queryFn: () => getAllWarehouses(),
     });
 
-    const { data: products, isLoading: isProductsLoading } = useQuery<Product[]>({
-        queryKey: ['products'],
-        queryFn: getAllProducts,
+    // The catalogue can outgrow a dropdown, so the list is searched
+    // server-side and capped — the picker shows the best matches, not the lot.
+    const [productSearch, setProductSearch] = React.useState('');
+    const [productQuery, setProductQuery] = React.useState('');
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => setProductQuery(productSearch), 300);
+        return () => clearTimeout(timer);
+    }, [productSearch]);
+
+    const { data: productPage, isLoading: isProductsLoading } = useQuery<ProductPage>({
+        queryKey: ['products', 'picker', productQuery],
+        queryFn: () => getAllProducts({ q: productQuery, limit: PRODUCT_PICKER_LIMIT, sort: 'name' }),
+        placeholderData: keepPreviousData,
     });
+
+    const products = productPage?.items ?? [];
+    const hiddenCount = Math.max(0, (productPage?.total ?? 0) - products.length);
 
     const handleSubmit = (values: FormValues) => {
         onSubmit(values);
@@ -113,32 +130,45 @@ const CreateInventoryForm = ({
                     name="productId"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Product ID</FormLabel>
+                            <FormLabel>Product</FormLabel>
+                            <Input
+                                type="search"
+                                value={productSearch}
+                                onChange={(event) => setProductSearch(event.target.value)}
+                                placeholder="Search the catalogue…"
+                                aria-label="Search products"
+                                className="mb-2"
+                            />
                             <Select
                                 onValueChange={(value) => field.onChange(value ? Number(value) : undefined)}
                                 defaultValue={field.value ? field.value.toString() : ''}>
                                 <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select Product ID" />
+                                        <SelectValue placeholder="Select a product" />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
                                     {isProductsLoading ? (
                                         <SelectItem value="Loading">Loading...</SelectItem>
+                                    ) : products.length === 0 ? (
+                                        <SelectItem value="none" disabled>
+                                            No products match
+                                        </SelectItem>
                                     ) : (
-                                        <>
-                                            {products &&
-                                                products.map((item) => (
-                                                    <SelectItem
-                                                        key={item.id}
-                                                        value={item.id ? item.id?.toString() : ''}>
-                                                        {item.name}
-                                                    </SelectItem>
-                                                ))}
-                                        </>
+                                        products.map((item) => (
+                                            <SelectItem key={item.id} value={item.id.toString()}>
+                                                {item.name}
+                                            </SelectItem>
+                                        ))
                                     )}
                                 </SelectContent>
                             </Select>
+                            {hiddenCount > 0 && (
+                                <p className="text-[0.7rem] text-muted-foreground">
+                                    Showing {products.length} of {products.length + hiddenCount} —
+                                    search to narrow.
+                                </p>
+                            )}
                             <FormMessage />
                         </FormItem>
                     )}

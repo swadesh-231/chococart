@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LogOut, Menu, Package, Search, ShoppingBag, UserRound } from 'lucide-react';
+import { LogOut, Menu, Package, Search, UserRound } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -28,18 +28,24 @@ import { cn, initialsOf } from '@/lib/utils';
 import { BrandMark, Wordmark } from './brand-mark';
 import CartSheet from './cart-sheet';
 
-/** Shown to everyone — these all live on the marketing page. */
+/**
+ * Signed out, the header sells the house: these all live on the landing page.
+ * Signed in they disappear entirely — an account holder came to buy chocolate,
+ * not to read the story again.
+ */
 const marketingNav = [
     { label: 'Our Story', href: '/#story' },
     { label: 'The Craft', href: '/#craft' },
     { label: 'Journal', href: '/#journal' },
 ];
 
-/** The catalogue only appears once there is an account to order with. */
-const memberNav = [
-    { label: 'Shop', href: '/shop' },
-    { label: 'My Orders', href: '/account/orders' },
-];
+/**
+ * Signed in there is no navigation bar at all. The lockup goes to the shop,
+ * types are chosen from the shop's own filter rail, and the account menu holds
+ * the profile and order history — so the header is down to who you are and
+ * what is in your bag.
+ */
+const memberNav: { label: string; href: string }[] = [];
 
 /** True while the page is scrolled far enough to warrant the compact bar. */
 function useScrolled(threshold = 12) {
@@ -77,9 +83,19 @@ export default function Header() {
     const signInHref = `/signin?callbackUrl=${encodeURIComponent(returnTo)}`;
     const signUpHref = `/signin?mode=signup&callbackUrl=${encodeURIComponent(returnTo)}`;
 
-    const navItems = signedIn ? [...memberNav, ...marketingNav] : marketingNav;
-    const isActive = (href: string) =>
-        href.startsWith('/#') ? false : pathname === href || pathname.startsWith(`${href}/`);
+    const navItems = signedIn ? memberNav : marketingNav;
+
+    // Signed in, the lockup goes to the shop, not the marketing page — that is
+    // the home of someone who already has an account.
+    const homeHref = signedIn ? '/shop' : '/';
+
+    const isActive = (href: string) => {
+        if (href.startsWith('/#')) return false;
+        // Category links differ only by query string, which `pathname` drops,
+        // so only the bare /shop link can be matched on path alone.
+        if (href.includes('?')) return false;
+        return pathname === href || pathname.startsWith(`${href}/`);
+    };
 
     return (
         <header className="sticky top-0 z-50">
@@ -121,7 +137,7 @@ export default function Header() {
                                     Browse Chococart
                                 </SheetDescription>
                                 <Link
-                                    href="/"
+                                    href={homeHref}
                                     onClick={() => setMobileOpen(false)}
                                     className="flex items-center gap-2.5 text-cocoa-900">
                                     <BrandMark className="h-7 text-gold" />
@@ -130,7 +146,7 @@ export default function Header() {
                             </div>
 
                             <nav className="px-6 py-4" aria-label="Mobile">
-                                <ul className="divide-y divide-border">
+                                <ul className={cn(navItems.length > 0 && 'divide-y divide-border')}>
                                     {navItems.map((item) => (
                                         <li key={item.label}>
                                             <SheetClose
@@ -167,6 +183,17 @@ export default function Header() {
                                                 </AvatarFallback>
                                             </Avatar>
                                             My profile
+                                        </SheetClose>
+                                        <SheetClose
+                                            nativeButton={false}
+                                            render={
+                                                <Link
+                                                    href="/account/orders"
+                                                    className="eyebrow flex items-center gap-2.5 text-cocoa-700 transition-colors hover:text-cocoa-950"
+                                                />
+                                            }>
+                                            <Package className="size-3.5" />
+                                            My orders
                                         </SheetClose>
                                         <button
                                             type="button"
@@ -208,9 +235,9 @@ export default function Header() {
                     </Sheet>
 
                     <Link
-                        href="/"
+                        href={homeHref}
                         className="flex shrink-0 items-center gap-2.5 text-cocoa-900"
-                        aria-label="Chococart home">
+                        aria-label={signedIn ? 'Chococart shop' : 'Chococart home'}>
                         <BrandMark
                             className={cn(
                                 'text-gold transition-all duration-300',
@@ -223,8 +250,10 @@ export default function Header() {
                         />
                     </Link>
 
-                    {/* Middle: navigation, which grows once there is an account. */}
-                    <nav className="hidden md:block" aria-label="Main">
+                    {/* Middle: the marketing nav, which is gone once signed in. */}
+                    <nav
+                        className={cn('hidden md:block', navItems.length === 0 && 'md:hidden')}
+                        aria-label="Main">
                         <ul className="flex items-center gap-7 lg:gap-9">
                             {navItems.map((item) => (
                                 <li key={item.label}>
@@ -304,12 +333,9 @@ export default function Header() {
                                                 <UserRound className="size-3.5" />
                                                 My profile
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem
-                                                nativeButton={false}
-                                                render={<Link href="/shop" />}>
-                                                <ShoppingBag className="size-3.5" />
-                                                Shop the collection
-                                            </DropdownMenuItem>
+                                            {/* Order history lives here rather than
+                                                in the bar — it is an account
+                                                errand, not a way to shop. */}
                                             <DropdownMenuItem
                                                 nativeButton={false}
                                                 render={<Link href="/account/orders" />}>

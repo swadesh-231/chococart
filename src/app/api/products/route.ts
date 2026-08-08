@@ -27,12 +27,20 @@ export async function POST(request: Request) {
     }
 }
 
+/**
+ * Every sort ends in `id`, and that is not decoration.
+ *
+ * `ORDER BY price` alone is not a total order — hundreds of chocolates share a
+ * price — so Postgres is free to return tied rows in a different order for each
+ * LIMIT/OFFSET query. Page 2 then repeats rows page 1 already showed and skips
+ * others entirely. The unique tiebreak pins the order so paging is stable.
+ */
 const SORTS = {
-    featured: desc(products.id),
-    'price-asc': asc(products.price),
-    'price-desc': desc(products.price),
-    name: asc(products.name),
-    'cocoa-desc': desc(products.cocoaPercent),
+    featured: [desc(products.id)],
+    'price-asc': [asc(products.price), asc(products.id)],
+    'price-desc': [desc(products.price), asc(products.id)],
+    name: [asc(products.name), asc(products.id)],
+    'cocoa-desc': [desc(products.cocoaPercent), asc(products.id)],
 } as const;
 
 const DEFAULT_LIMIT = 24;
@@ -106,7 +114,7 @@ export async function GET(request: Request) {
 
     try {
         const [items, [totals]] = await Promise.all([
-            db.select().from(products).where(where).orderBy(orderBy).limit(limit).offset(offset),
+            db.select().from(products).where(where).orderBy(...orderBy).limit(limit).offset(offset),
             db.select({ n: count() }).from(products).where(where),
         ]);
 

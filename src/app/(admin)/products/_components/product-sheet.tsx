@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
     Sheet,
@@ -23,15 +23,33 @@ const ProductSheet = () => {
     const queryClient = useQueryClient();
     const [progress, setProgress] = React.useState<number | null>(null);
 
+    /**
+     * ImageKit is optional. Asking once, while the sheet is open, tells the form
+     * whether to offer the file picker at all — better than letting an admin
+     * choose a file and only then discovering uploads were never set up.
+     */
+    const { data: uploadsConfigured = true } = useQuery({
+        queryKey: ['imagekit-configured'],
+        queryFn: async () => (await fetch('/api/imagekit/auth')).ok,
+        enabled: isOpen,
+        staleTime: 5 * 60 * 1000,
+        retry: false,
+    });
+
     const { mutate, isPending } = useMutation({
         mutationKey: ['create-product'],
         mutationFn: async (values: ProductFormValues) => {
-            const file = (values.image as FileList)[0];
+            const file = values.image?.[0];
 
             // Straight from the browser to ImageKit — the file never touches
-            // the Next server, so this works on an ephemeral filesystem.
-            setProgress(0);
-            const imageUrl = await uploadProductImage(file, setProgress);
+            // the Next server, so this works on an ephemeral filesystem. With
+            // no file chosen, the pasted URL is stored as-is.
+            let imageUrl = values.imageUrl?.trim() ?? '';
+
+            if (file) {
+                setProgress(0);
+                imageUrl = await uploadProductImage(file, setProgress);
+            }
 
             return createProduct({
                 name: values.name,
@@ -39,9 +57,16 @@ const ProductSheet = () => {
                 price: values.price,
                 category: values.category,
                 image: imageUrl,
+                cocoaPercent: values.cocoaPercent ?? null,
+                flavourNotes: values.flavourNotes?.length ? values.flavourNotes : null,
+                origin: values.origin?.trim() || null,
+                weightGrams: values.weightGrams ?? null,
+                vegan: values.vegan ?? false,
+                glutenFree: values.glutenFree ?? false,
             });
         },
         onSuccess: () => {
+            // Prefix match, so both the admin table and the storefront refetch.
             queryClient.invalidateQueries({ queryKey: ['products'] });
             toast({ title: 'Product created successfully' });
             setProgress(null);
@@ -55,17 +80,23 @@ const ProductSheet = () => {
 
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>
-            <SheetContent className="min-w-[28rem] space-y-4 overflow-y-auto">
-                <SheetHeader>
-                    <SheetTitle className="font-heading text-2xl">Create Product</SheetTitle>
+            {/* A column, so the form body scrolls and its submit bar stays put. */}
+            {/* The width has to carry the same variant prefix the base uses, or
+                tailwind-merge keeps both and the narrower one can win. */}
+            <SheetContent className="flex w-full flex-col gap-0 overflow-hidden p-0 data-[side=right]:sm:max-w-lg">
+                <SheetHeader className="border-b border-border px-6 py-5">
+                    <SheetTitle className="font-heading text-2xl">Create product</SheetTitle>
                     <SheetDescription>
-                        Images are uploaded to ImageKit and served from their CDN.
+                        {uploadsConfigured
+                            ? 'Images are uploaded to ImageKit and served from their CDN.'
+                            : 'Image uploads are not configured — paste an image URL instead.'}
                     </SheetDescription>
                 </SheetHeader>
                 <CreateProductForm
                     onSubmit={(values) => mutate(values)}
                     disabled={isPending}
                     progress={progress}
+                    uploadsConfigured={uploadsConfigured}
                 />
             </SheetContent>
         </Sheet>

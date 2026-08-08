@@ -9,11 +9,10 @@ import {
     APP_ORDER_NOTE_KEY,
     RAZORPAY_CURRENCY,
     getRazorpay,
+    razorpayKeyId,
     toPaise,
 } from '@/lib/razorpay';
 import { cartOrderSchema } from '@/lib/validators/orderSchema';
-
-/** Thrown inside the transaction to roll it back with a client-safe message. */
 class OrderError extends Error {}
 
 export async function POST(request: Request) {
@@ -179,7 +178,7 @@ export async function POST(request: Request) {
             razorpayOrderId: razorpayOrder.id,
             amount: razorpayOrder.amount,
             currency: razorpayOrder.currency,
-            keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+            keyId: razorpayKeyId(),
             customer: {
                 name: `${appUser.fname} ${appUser.lname}`.trim(),
                 email: appUser.email,

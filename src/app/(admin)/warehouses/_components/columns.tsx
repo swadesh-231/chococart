@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
@@ -32,11 +33,14 @@ export const columns: ColumnDef<Warehouse>[] = [
                             <MoreHorizontal className="h-4 w-4" />
                             </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(String(row.id))}>
-                            Copy payment ID
-                        </DropdownMenuItem>
+                        {/* Base UI requires a Group around every GroupLabel. */}
+                        <DropdownMenuGroup>
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem
+                                onClick={() => navigator.clipboard.writeText(String(row.id))}>
+                                Copy payment ID
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>View customer</DropdownMenuItem>
                         <DropdownMenuItem>View payment details</DropdownMenuItem>

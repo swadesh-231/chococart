@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chococart — The Art of Pure Indulgence",
+  title: "Chococart",
   description:
     "Bean to bar chocolate, crafted in small batches with the world's finest cacao. Delivered to your door in 10 minutes.",
 };

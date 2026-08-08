@@ -1,4 +1,12 @@
-import type { CheckoutSession, MyOrder, OrderData, Product, VerifyPaymentData } from '@/types';
+import type { ProfileFormValues } from '@/lib/validators/profileSchema';
+import type {
+    CheckoutSession,
+    MyOrder,
+    OrderData,
+    Product,
+    Profile,
+    VerifyPaymentData,
+} from '@/types';
 
 export class ApiError extends Error {
     readonly status: number;
@@ -10,16 +18,43 @@ export class ApiError extends Error {
     }
 }
 
+/**
+ * The proxy only checks that a session cookie exists, so an expired or revoked
+ * one still reaches the page — and then every query here comes back 401. Drop
+ * the dead cookie (otherwise /signin bounces straight back) and send the
+ * visitor to sign in, keeping where they were.
+ */
+async function handleSignedOut() {
+    if (typeof window === 'undefined' || redirectingToSignIn) return;
+    redirectingToSignIn = true;
+
+    const { authClient } = await import('@/lib/auth/auth-client');
+    await authClient.signOut().catch(() => undefined);
+
+    const { pathname, search } = window.location;
+    const callbackUrl = pathname === '/signin' ? '/' : `${pathname}${search}`;
+    window.location.replace(`/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+}
+
+/** Guards against a page full of queries each firing its own redirect. */
+let redirectingToSignIn = false;
+
 async function request<T>(input: string, init?: RequestInit): Promise<T> {
     const response = await fetch(input, {
         ...init,
         headers: {
-            ...(init?.body ? { 'Content-Type': 'application/json' } : {}),
+            // Only JSON bodies are declared. A FormData body has to keep the
+            // multipart boundary the browser generates for it.
+            ...(typeof init?.body === 'string' ? { 'Content-Type': 'application/json' } : {}),
             ...init?.headers,
         },
     });
 
     const payload = await response.json().catch(() => null);
+
+    if (response.status === 401) {
+        void handleSignedOut();
+    }
 
     if (!response.ok) {
         const message =
@@ -38,6 +73,25 @@ export function getProducts() {
 
 export function getSingleProduct(id: string) {
     return request<Product>(`/api/products/${id}`);
+}
+
+export function getProfile() {
+    return request<Profile>('/api/account/profile');
+}
+
+export function updateProfile(data: ProfileFormValues) {
+    return request<Profile>('/api/account/profile', {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+    });
+}
+
+/** Stores the picture on ImageKit and hands back its hosted URL. */
+export function uploadAvatar(file: File) {
+    const body = new FormData();
+    body.append('file', file);
+
+    return request<{ url: string }>('/api/account/avatar', { method: 'POST', body });
 }
 
 export function getMyOrders() {

@@ -9,6 +9,9 @@ export const users = pgTable('users', {
     provider: varchar('provider', { length: 20 }),
     externalId: varchar('external_id', { length: 100 }).notNull(),
     image: text('image'),
+    // The customer's default delivery address, used to prefill checkout. Null
+    // until they save one — every order still stores its own copy in `orders`.
+    address: text('address'),
     role: varchar('role', { length: 12 }).notNull().default('customer'),
     updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
     createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),

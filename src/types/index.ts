@@ -6,6 +6,18 @@ export interface Product {
     price: number;
 }
 
+/** The signed-in customer's own account, as `/api/account/profile` returns it. */
+export interface Profile {
+    fname: string;
+    lname: string;
+    /** Read-only: sign-in identity, never editable from the profile form. */
+    email: string;
+    address: string | null;
+    image: string | null;
+    role: string;
+    createdAt: string | null;
+}
+
 export interface Warehouse {
     id: number;
     name: string;
@@ -68,6 +80,7 @@ export interface OrderStatusData {
 
 export interface MyOrder {
     id: number;
+    productId: number;
     image: string | null;
     price: number;
     qty: number;

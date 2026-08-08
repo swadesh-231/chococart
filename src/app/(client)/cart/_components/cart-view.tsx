@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowLeft, Loader2, Lock, ShoppingBag, Trash2, Truck } from 'lucide-react';
 
@@ -21,10 +22,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useCheckout } from '@/hooks/use-checkout';
+import { getProfile } from '@/lib/api';
 import { productImageSrc } from '@/lib/images';
 import { formatPrice } from '@/lib/utils';
 import { deliverySchema, type DeliveryFormValues } from '@/lib/validators/orderSchema';
 import { selectCartCount, selectCartSubtotal, useCartStore } from '@/store/cart/cart-store';
+import type { Profile } from '@/types';
 import QtyStepper from '../../_components/qty-stepper';
 
 export default function CartView() {
@@ -41,6 +44,17 @@ export default function CartView() {
         defaultValues: { address: '', pincode: '' },
         mode: 'onBlur',
     });
+
+    const { data: profile } = useQuery<Profile>({ queryKey: ['profile'], queryFn: getProfile });
+
+    // Start from the address saved on the profile, but never overwrite anything
+    // typed here — a gift can go somewhere else without changing the account.
+    const { setValue, getValues } = form;
+    React.useEffect(() => {
+        if (profile?.address && !getValues('address')) {
+            setValue('address', profile.address);
+        }
+    }, [profile, setValue, getValues]);
 
     const { checkout, busy } = useCheckout({
         description: `${count} ${count === 1 ? 'bar' : 'bars'} from Chococart`,

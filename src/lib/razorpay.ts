@@ -5,18 +5,34 @@ export const RAZORPAY_CURRENCY = 'INR';
 let client: Razorpay | null = null;
 
 /**
+ * Server-side only. Both the canonical names and the ones this project's .env
+ * already uses are accepted, so a working key never has to be renamed.
+ */
+export function razorpayKeyId(): string | undefined {
+    return (
+        process.env.RAZORPAY_KEY_ID ||
+        process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
+        process.env.NEXT_JS_RAZERPAY_TEST_KEY
+    );
+}
+
+export function razorpayKeySecret(): string | undefined {
+    return process.env.RAZORPAY_KEY_SECRET || process.env.NEXT_JS_RAZERPAY_SECREAT_KEY;
+}
+
+/**
  * Lazily constructed so a missing key does not blow up at import time (which
  * would break `next build`); it fails on first real use instead.
  */
 export function getRazorpay(): Razorpay {
     if (client) return client;
 
-    const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
+    const keyId = razorpayKeyId();
+    const keySecret = razorpayKeySecret();
 
     if (!keyId || !keySecret) {
         throw new Error(
-            'NEXT_PUBLIC_RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET must be set in .env'
+            'Razorpay keys are missing — set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in .env'
         );
     }
 

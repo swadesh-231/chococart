@@ -112,7 +112,8 @@ const AdminPage = async () => {
                         <CardDescription>The latest orders placed in your store.</CardDescription>
                     </div>
                     <Button
-                        render={<Link href="/admin/orders" />}
+                        nativeButton={false}
+                        render={<Link href="/orders" />}
                         size="sm"
                         className="ml-auto gap-1">
                         View All

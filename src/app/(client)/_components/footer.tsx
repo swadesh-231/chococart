@@ -1,7 +1,39 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Truck } from 'lucide-react';
+import { Truck } from 'lucide-react';
 
 import { BrandMark, Wordmark } from './brand-mark';
+
+/* lucide dropped brand glyphs in v1, so the social marks are drawn here. */
+function InstagramIcon({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
+            <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="5"
+                stroke="currentColor"
+                strokeWidth="1.4"
+            />
+            <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.4" />
+            <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
+        </svg>
+    );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
+            <path
+                d="M14.5 8.5V6.9c0-.8.2-1.2 1.3-1.2h1.4V3h-2.4c-2.6 0-3.6 1.4-3.6 3.7v1.8H9v2.8h2.2V21h3.3v-9.7h2.3l.4-2.8h-2.7Z"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+}
 
 const columns = [
     {
@@ -32,8 +64,8 @@ const columns = [
 ];
 
 const socials = [
-    { label: 'Instagram', icon: Instagram, href: 'https://instagram.com' },
-    { label: 'Facebook', icon: Facebook, href: 'https://facebook.com' },
+    { label: 'Instagram', icon: InstagramIcon, href: 'https://instagram.com' },
+    { label: 'Facebook', icon: FacebookIcon, href: 'https://facebook.com' },
 ];
 
 export default function Footer() {
@@ -72,7 +104,7 @@ export default function Footer() {
                                         rel="noreferrer noopener"
                                         aria-label={social.label}
                                         className="grid size-9 place-items-center border border-ivory/15 text-ivory/60 transition-colors hover:border-gold/50 hover:text-gold">
-                                        <social.icon className="size-4" strokeWidth={1.4} />
+                                        <social.icon className="size-4" />
                                     </a>
                                 </li>
                             ))}

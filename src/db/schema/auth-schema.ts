@@ -1,11 +1,5 @@
 import { boolean, index, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
-/**
- * Tables owned by better-auth. These are generated from better-auth's core
- * table definitions — the property keys must stay camelCase because the drizzle
- * adapter looks fields up by name. The application's own `users` table in
- * ./schema.ts is separate and is linked to `user.id` via `users.externalId`.
- */
 
 export const user = pgTable('user', {
     id: text('id').primaryKey(),

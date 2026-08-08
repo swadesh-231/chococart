@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
@@ -89,21 +90,31 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
                             <span className="sr-only">Toggle user menu</span>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>
-                                <span className="block text-[0.8rem] font-medium">
-                                    {appUser.fname} {appUser.lname}
-                                </span>
-                                <span className="block text-[0.7rem] text-muted-foreground">
-                                    {appUser.email}
-                                </span>
-                            </DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem render={<Link href="/" />}>
-                                View storefront
-                            </DropdownMenuItem>
-                            <DropdownMenuItem render={<Link href="/account/orders" />}>
-                                My orders
-                            </DropdownMenuItem>
+                            {/* Base UI requires a Group around every GroupLabel. */}
+                            <DropdownMenuGroup>
+                                <DropdownMenuLabel>
+                                    <span className="block text-[0.8rem] font-medium">
+                                        {appUser.fname} {appUser.lname}
+                                    </span>
+                                    <span className="block text-[0.7rem] text-muted-foreground">
+                                        {appUser.email}
+                                    </span>
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem nativeButton={false} render={<Link href="/" />}>
+                                    View storefront
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                    nativeButton={false}
+                                    render={<Link href="/account/profile" />}>
+                                    My profile
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                    nativeButton={false}
+                                    render={<Link href="/account/orders" />}>
+                                    My orders
+                                </DropdownMenuItem>
+                            </DropdownMenuGroup>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
                                 <Signout>Logout</Signout>

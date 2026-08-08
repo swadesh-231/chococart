@@ -5,7 +5,7 @@ import { db } from '@/db/db';
 import { orders } from '@/db/schema/schema';
 import { requireUser } from '@/lib/auth/session';
 import { ordersMatching } from '@/lib/orders/group';
-import { resolveOrderReference, type OrderReference } from '@/lib/razorpay';
+import { razorpayKeySecret, resolveOrderReference, type OrderReference } from '@/lib/razorpay';
 
 const verifySchema = z.object({
     razorpay_order_id: z.string().min(1),
@@ -14,7 +14,7 @@ const verifySchema = z.object({
 });
 
 function isSignatureValid(orderId: string, paymentId: string, signature: string): boolean {
-    const secret = process.env.RAZORPAY_KEY_SECRET;
+    const secret = razorpayKeySecret();
     if (!secret) throw new Error('RAZORPAY_KEY_SECRET must be set in .env');
 
     const expected = crypto

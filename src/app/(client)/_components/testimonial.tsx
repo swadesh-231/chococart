@@ -36,7 +36,7 @@ export default function Testimonial() {
                             as="li"
                             key={entry.name}
                             className="flex flex-col items-center text-center">
-                            <figure className="flex flex-1 flex-col items-center">
+                            <figure className="flex h-full flex-1 flex-col items-center">
                                 <span
                                     aria-hidden="true"
                                     className="font-heading text-4xl leading-none text-gold/70">
@@ -45,7 +45,8 @@ export default function Testimonial() {
                                 <blockquote className="mt-3 font-heading text-xl leading-relaxed font-light text-cocoa-800 sm:text-[1.375rem]">
                                     {entry.quote}
                                 </blockquote>
-                                <figcaption className="eyebrow mt-6 text-[0.5625rem] text-cocoa-500">
+                                {/* Pushed down so the three attributions sit on one line. */}
+                                <figcaption className="eyebrow mt-auto pt-6 text-[0.5625rem] text-cocoa-500">
                                     {entry.name} · {entry.city}
                                 </figcaption>
                             </figure>

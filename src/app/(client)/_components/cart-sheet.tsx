@@ -93,6 +93,7 @@ export default function CartSheet() {
                                 sounds like you.
                             </p>
                             <SheetClose
+                                nativeButton={false}
                                 render={
                                     <Link
                                         href="/shop"
@@ -181,10 +182,11 @@ export default function CartSheet() {
                             </span>
                         </div>
                         <p className="mt-1.5 text-[0.7rem] text-cocoa-500">
-                            Delivery is calculated at checkout.
+                            Delivery is complimentary — this is what you pay.
                         </p>
 
                         <SheetClose
+                            nativeButton={false}
                             render={
                                 <Link
                                     href="/cart"
@@ -196,6 +198,7 @@ export default function CartSheet() {
                         </SheetClose>
 
                         <SheetClose
+                            nativeButton={false}
                             render={
                                 <Link
                                     href="/shop"

@@ -11,6 +11,7 @@ export async function GET() {
         const myOrders = await db
             .select({
                 id: orders.id,
+                productId: orders.productId,
                 product: products.name,
                 type: orders.type,
                 price: orders.price,

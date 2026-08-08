@@ -24,6 +24,20 @@ export function formatDate(value: string | Date | null | undefined) {
   })
 }
 
+/** Up to two letters for an avatar fallback: "Jane Doe" -> "JD". */
+export function initialsOf(name: string | null | undefined, fallback = "?") {
+  const letters = (name ?? "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part[0])
+    .filter((letter) => /\p{L}/u.test(letter))
+
+  if (!letters.length) return fallback
+
+  return `${letters[0]}${letters.length > 1 ? letters[letters.length - 1] : ""}`.toUpperCase()
+}
+
 /** Prices are stored as whole rupees. */
 export function formatPrice(amount: number) {
   return new Intl.NumberFormat("en-IN", {

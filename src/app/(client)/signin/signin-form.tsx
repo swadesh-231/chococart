@@ -44,9 +44,15 @@ function GoogleIcon() {
     );
 }
 
-export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
+export default function SignInForm({
+    callbackUrl,
+    defaultMode = 'signin',
+}: {
+    callbackUrl: string;
+    defaultMode?: 'signin' | 'signup';
+}) {
     const router = useRouter();
-    const [mode, setMode] = React.useState<'signin' | 'signup'>('signin');
+    const [mode, setMode] = React.useState<'signin' | 'signup'>(defaultMode);
     const [isSubmitting, setIsSubmitting] = React.useState(false);
 
     const isSignUp = mode === 'signup';
@@ -113,7 +119,10 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
             <div className="rule-gold mx-auto mt-8 w-24" />
 
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-5">
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    noValidate
+                    className="mt-8 space-y-5">
                     {isSignUp && (
                         <FormField
                             control={form.control}
@@ -122,7 +131,12 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
                                 <FormItem>
                                     <FormLabel className="eyebrow text-cocoa-600">Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Jane Doe" {...field} />
+                                        <Input
+                                            autoComplete="name"
+                                            placeholder="Jane Doe"
+                                            className="h-11 rounded-none bg-background"
+                                            {...field}
+                                        />
                                     </FormControl>
                                     <FormMessage className="text-xs" />
                                 </FormItem>
@@ -140,6 +154,7 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
                                         type="email"
                                         autoComplete="email"
                                         placeholder="you@example.com"
+                                        className="h-11 rounded-none bg-background"
                                         {...field}
                                     />
                                 </FormControl>
@@ -160,6 +175,7 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
                                             isSignUp ? 'new-password' : 'current-password'
                                         }
                                         placeholder="••••••••"
+                                        className="h-11 rounded-none bg-background"
                                         {...field}
                                     />
                                 </FormControl>

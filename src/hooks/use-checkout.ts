@@ -9,12 +9,6 @@ import { ApiError, placeOrder, verifyPayment } from '@/lib/api';
 import { openRazorpayCheckout } from '@/lib/razorpay-checkout';
 import type { CheckoutSession, OrderData, VerifyPaymentData } from '@/types';
 
-/**
- * Places an order and drives it through Razorpay Checkout to verification.
- *
- * The whole flow is one "busy" state on purpose: from the moment the customer
- * commits until the payment is confirmed, nothing else should be clickable.
- */
 export function useCheckout({
     description,
     onPaid,
@@ -36,9 +30,10 @@ export function useCheckout({
 
     const verify = useMutation({
         mutationFn: verifyPayment,
-        onSuccess: () => {
+        onSuccess: (data) => {
             onPaid?.();
-            router.push('/payment/success');
+            // The reference is only for display, so a missing one is not fatal.
+            router.push(`/payment/success?order=${data.orderId}`);
         },
         onError: (err) => {
             setIsPaying(false);
@@ -48,13 +43,14 @@ export function useCheckout({
     });
 
     const startCheckout = async (session: CheckoutSession) => {
+        // The server sends its own key id back; the public var is only a fallback.
         const key = session.keyId ?? process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
 
         if (!key) {
             setIsPaying(false);
             toast.add({
                 title: 'Payments are not configured yet',
-                description: 'Set NEXT_PUBLIC_RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in .env',
+                description: 'Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in .env',
                 type: 'error',
             });
             return;

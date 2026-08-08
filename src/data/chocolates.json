@@ -1,0 +1,1713 @@
+[
+  {
+    "name": "62% Dark Madagascar",
+    "description": "Single origin cacao from Madagascar, conched for seventy-two hours and tempered in small batches. Tastes of red berries and a bright, clean acidity.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "fruity",
+      "citrus"
+    ],
+    "origin": "Madagascar",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-madagascar",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "70% Dark Madagascar",
+    "description": "Single origin cacao from Madagascar, conched for seventy-two hours and tempered in small batches. Tastes of red berries and a bright, clean acidity.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "fruity",
+      "citrus"
+    ],
+    "origin": "Madagascar",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-madagascar",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "78% Dark Madagascar",
+    "description": "Single origin cacao from Madagascar, conched for seventy-two hours and tempered in small batches. Tastes of red berries and a bright, clean acidity.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "fruity",
+      "citrus"
+    ],
+    "origin": "Madagascar",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-madagascar",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "85% Dark Madagascar",
+    "description": "Single origin cacao from Madagascar, conched for seventy-two hours and tempered in small batches. Tastes of red berries and a bright, clean acidity.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "fruity",
+      "citrus"
+    ],
+    "origin": "Madagascar",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-madagascar",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "62% Dark Ecuador",
+    "description": "Single origin cacao from Ecuador, conched for seventy-two hours and tempered in small batches. Tastes of jasmine and warm toasted grain.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "floral",
+      "roasted"
+    ],
+    "origin": "Ecuador",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-ecuador",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "70% Dark Ecuador",
+    "description": "Single origin cacao from Ecuador, conched for seventy-two hours and tempered in small batches. Tastes of jasmine and warm toasted grain.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "floral",
+      "roasted"
+    ],
+    "origin": "Ecuador",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-ecuador",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "78% Dark Ecuador",
+    "description": "Single origin cacao from Ecuador, conched for seventy-two hours and tempered in small batches. Tastes of jasmine and warm toasted grain.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "floral",
+      "roasted"
+    ],
+    "origin": "Ecuador",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-ecuador",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "85% Dark Ecuador",
+    "description": "Single origin cacao from Ecuador, conched for seventy-two hours and tempered in small batches. Tastes of jasmine and warm toasted grain.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "floral",
+      "roasted"
+    ],
+    "origin": "Ecuador",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-ecuador",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "62% Dark Peru",
+    "description": "Single origin cacao from Peru, conched for seventy-two hours and tempered in small batches. Tastes of toasted almond and soft caramel.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Peru",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-peru",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "70% Dark Peru",
+    "description": "Single origin cacao from Peru, conched for seventy-two hours and tempered in small batches. Tastes of toasted almond and soft caramel.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Peru",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-peru",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "78% Dark Peru",
+    "description": "Single origin cacao from Peru, conched for seventy-two hours and tempered in small batches. Tastes of toasted almond and soft caramel.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Peru",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-peru",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "85% Dark Peru",
+    "description": "Single origin cacao from Peru, conched for seventy-two hours and tempered in small batches. Tastes of toasted almond and soft caramel.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Peru",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-peru",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "62% Dark Venezuela",
+    "description": "Single origin cacao from Venezuela, conched for seventy-two hours and tempered in small batches. Tastes of hazelnut cream and a long, round finish.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "creamy",
+      "nutty"
+    ],
+    "origin": "Venezuela",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-venezuela",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "70% Dark Venezuela",
+    "description": "Single origin cacao from Venezuela, conched for seventy-two hours and tempered in small batches. Tastes of hazelnut cream and a long, round finish.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "creamy",
+      "nutty"
+    ],
+    "origin": "Venezuela",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-venezuela",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "78% Dark Venezuela",
+    "description": "Single origin cacao from Venezuela, conched for seventy-two hours and tempered in small batches. Tastes of hazelnut cream and a long, round finish.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "creamy",
+      "nutty"
+    ],
+    "origin": "Venezuela",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-venezuela",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "85% Dark Venezuela",
+    "description": "Single origin cacao from Venezuela, conched for seventy-two hours and tempered in small batches. Tastes of hazelnut cream and a long, round finish.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "creamy",
+      "nutty"
+    ],
+    "origin": "Venezuela",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-venezuela",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "62% Dark Tanzania",
+    "description": "Single origin cacao from Tanzania, conched for seventy-two hours and tempered in small batches. Tastes of dried plum and a whisper of black pepper.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "fruity",
+      "spiced"
+    ],
+    "origin": "Tanzania",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-tanzania",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "70% Dark Tanzania",
+    "description": "Single origin cacao from Tanzania, conched for seventy-two hours and tempered in small batches. Tastes of dried plum and a whisper of black pepper.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "fruity",
+      "spiced"
+    ],
+    "origin": "Tanzania",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-tanzania",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "78% Dark Tanzania",
+    "description": "Single origin cacao from Tanzania, conched for seventy-two hours and tempered in small batches. Tastes of dried plum and a whisper of black pepper.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "fruity",
+      "spiced"
+    ],
+    "origin": "Tanzania",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-tanzania",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "85% Dark Tanzania",
+    "description": "Single origin cacao from Tanzania, conched for seventy-two hours and tempered in small batches. Tastes of dried plum and a whisper of black pepper.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "fruity",
+      "spiced"
+    ],
+    "origin": "Tanzania",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-tanzania",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "62% Dark Vietnam",
+    "description": "Single origin cacao from Vietnam, conched for seventy-two hours and tempered in small batches. Tastes of star anise and dark roasted cocoa.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "spiced",
+      "roasted"
+    ],
+    "origin": "Vietnam",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-vietnam",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "70% Dark Vietnam",
+    "description": "Single origin cacao from Vietnam, conched for seventy-two hours and tempered in small batches. Tastes of star anise and dark roasted cocoa.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "spiced",
+      "roasted"
+    ],
+    "origin": "Vietnam",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-vietnam",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "78% Dark Vietnam",
+    "description": "Single origin cacao from Vietnam, conched for seventy-two hours and tempered in small batches. Tastes of star anise and dark roasted cocoa.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "spiced",
+      "roasted"
+    ],
+    "origin": "Vietnam",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-vietnam",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "85% Dark Vietnam",
+    "description": "Single origin cacao from Vietnam, conched for seventy-two hours and tempered in small batches. Tastes of star anise and dark roasted cocoa.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "spiced",
+      "roasted"
+    ],
+    "origin": "Vietnam",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-vietnam",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "62% Dark Ghana",
+    "description": "Single origin cacao from Ghana, conched for seventy-two hours and tempered in small batches. Tastes of deep roast and burnt sugar.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Ghana",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-ghana",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "70% Dark Ghana",
+    "description": "Single origin cacao from Ghana, conched for seventy-two hours and tempered in small batches. Tastes of deep roast and burnt sugar.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Ghana",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-ghana",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "78% Dark Ghana",
+    "description": "Single origin cacao from Ghana, conched for seventy-two hours and tempered in small batches. Tastes of deep roast and burnt sugar.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Ghana",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-ghana",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "85% Dark Ghana",
+    "description": "Single origin cacao from Ghana, conched for seventy-two hours and tempered in small batches. Tastes of deep roast and burnt sugar.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Ghana",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-ghana",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "62% Dark Colombia",
+    "description": "Single origin cacao from Colombia, conched for seventy-two hours and tempered in small batches. Tastes of orange peel and orange blossom.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "citrus",
+      "floral"
+    ],
+    "origin": "Colombia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-colombia",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "70% Dark Colombia",
+    "description": "Single origin cacao from Colombia, conched for seventy-two hours and tempered in small batches. Tastes of orange peel and orange blossom.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "citrus",
+      "floral"
+    ],
+    "origin": "Colombia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-colombia",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "78% Dark Colombia",
+    "description": "Single origin cacao from Colombia, conched for seventy-two hours and tempered in small batches. Tastes of orange peel and orange blossom.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "citrus",
+      "floral"
+    ],
+    "origin": "Colombia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-colombia",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "85% Dark Colombia",
+    "description": "Single origin cacao from Colombia, conched for seventy-two hours and tempered in small batches. Tastes of orange peel and orange blossom.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "citrus",
+      "floral"
+    ],
+    "origin": "Colombia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-colombia",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "Sea Salt Caramel",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with flowing caramel and flakes of Brittany sea salt.",
+    "price": 465,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "caramel",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "sea-salt-caramel",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Roasted Hazelnut",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with Piedmont hazelnuts, roasted dark and folded through.",
+    "price": 485,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "nutty",
+      "roasted"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "roasted-hazelnut",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Honey Almond",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with wildflower honey and slivered Marcona almonds.",
+    "price": 505,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "honey-almond",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Salted Pretzel",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with buttered pretzel and a salted-butter finish.",
+    "price": 425,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "salted-pretzel",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Coffee Cream",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with slow-drawn espresso folded into milk chocolate.",
+    "price": 445,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "roasted",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "coffee-cream",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Butterscotch",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with brown butter and burnt-sugar butterscotch.",
+    "price": 465,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "caramel",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "butterscotch",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Cocoa Nib Crunch",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with cracked nibs for a crackle through every square.",
+    "price": 485,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "roasted",
+      "nutty"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "cocoa-nib-crunch",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Toasted Coconut",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with toasted coconut and a soft vanilla close.",
+    "price": 505,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "nutty",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "toasted-coconut",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Maple Pecan",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with dark maple and candied pecan.",
+    "price": 425,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "caramel",
+      "nutty"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "maple-pecan",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Chai Spice",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with cardamom, clove and a long cinnamon warmth.",
+    "price": 445,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "spiced",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "chai-spice",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Peanut Praline",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with crushed praline and roasted peanut.",
+    "price": 465,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "peanut-praline",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Cookies & Cream",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with crumbled cocoa biscuit through white-flecked milk.",
+    "price": 485,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "creamy",
+      "roasted"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "cookies-cream",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Orange Blossom",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with candied orange and a lift of blossom water.",
+    "price": 505,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "citrus",
+      "floral"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "orange-blossom",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Ginger Snap",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with stem ginger with a bright, peppery heat.",
+    "price": 425,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "spiced",
+      "citrus"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "ginger-snap",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Hazelnut Gianduja",
+    "description": "Milk chocolate at 38% cacao, tempered by hand and finished with the classic Turin blend, silk-smooth.",
+    "price": 445,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "nutty",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "hazelnut-gianduja",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Vanilla Bean White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with Madagascan vanilla, seeds and all.",
+    "price": 520,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "creamy",
+      "floral"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "vanilla-bean-white",
+    "image": "/assets/1721119564567.jpg"
+  },
+  {
+    "name": "Raspberry Ripple White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with freeze-dried raspberry rippled through.",
+    "price": 445,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "fruity",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "raspberry-ripple-white",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Pistachio Rose White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with Sicilian pistachio and a breath of rose.",
+    "price": 470,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "nutty",
+      "floral"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "pistachio-rose-white",
+    "image": "/assets/1721119564567.jpg"
+  },
+  {
+    "name": "Matcha White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with ceremonial matcha, grassy and clean.",
+    "price": 495,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "floral",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "matcha-white",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Lemon Curd White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with sharp lemon curd against sweet cocoa butter.",
+    "price": 520,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "citrus",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "lemon-curd-white",
+    "image": "/assets/1721119564567.jpg"
+  },
+  {
+    "name": "Strawberries & Cream White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with summer strawberry and thick cream.",
+    "price": 445,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "fruity",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "strawberries-cream-white",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Passionfruit White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with passionfruit with a proper sour edge.",
+    "price": 470,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "fruity",
+      "citrus"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "passionfruit-white",
+    "image": "/assets/1721119564567.jpg"
+  },
+  {
+    "name": "Cardamom Honey White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with green cardamom and set honey.",
+    "price": 495,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "spiced",
+      "floral"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "cardamom-honey-white",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Blackcurrant White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with blackcurrant, tart and deeply purple.",
+    "price": 520,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "fruity",
+      "floral"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "blackcurrant-white",
+    "image": "/assets/1721119564567.jpg"
+  },
+  {
+    "name": "Salted Vanilla White",
+    "description": "Cocoa butter white chocolate, slowly conched and finished with vanilla with a salted-butter backbone.",
+    "price": 445,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "creamy",
+      "caramel"
+    ],
+    "origin": "Blended",
+    "weightGrams": 65,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "salted-vanilla-white",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Champagne Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with Marc de Champagne through a white ganache. Boxed in nine.",
+    "price": 695,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "floral",
+      "creamy"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "champagne-truffle",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Espresso Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with a double shot folded into dark ganache. Boxed in nine.",
+    "price": 745,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "roasted",
+      "creamy"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "espresso-truffle",
+    "image": "/assets/1720707243058.jpg"
+  },
+  {
+    "name": "Salted Caramel Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with liquid caramel under a dark shell. Boxed in nine.",
+    "price": 795,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "caramel",
+      "creamy"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "salted-caramel-truffle",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Raspberry Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with raspberry pulp and a rolled cocoa finish. Boxed in nine.",
+    "price": 695,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "fruity",
+      "floral"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "raspberry-truffle",
+    "image": "/assets/1720707243058.jpg"
+  },
+  {
+    "name": "Hazelnut Praline Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with crushed praline in a milk ganache. Boxed in nine.",
+    "price": 745,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "hazelnut-praline-truffle",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Passionfruit Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with passionfruit ganache, sharp and bright. Boxed in nine.",
+    "price": 795,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "fruity",
+      "citrus"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "passionfruit-truffle",
+    "image": "/assets/1720707243058.jpg"
+  },
+  {
+    "name": "Pistachio Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with ground pistachio through white ganache. Boxed in nine.",
+    "price": 695,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "nutty",
+      "creamy"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "pistachio-truffle",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Earl Grey Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with bergamot-steeped cream and dark chocolate. Boxed in nine.",
+    "price": 745,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "floral",
+      "citrus"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "earl-grey-truffle",
+    "image": "/assets/1720707243058.jpg"
+  },
+  {
+    "name": "Rum & Raisin Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with dark rum and raisins left to soak overnight. Boxed in nine.",
+    "price": 795,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "spiced",
+      "fruity"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "rum-raisin-truffle",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Cinnamon Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with Ceylon cinnamon and warm milk ganache. Boxed in nine.",
+    "price": 695,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "spiced",
+      "creamy"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "cinnamon-truffle",
+    "image": "/assets/1720707243058.jpg"
+  },
+  {
+    "name": "Sea Salt Dark Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with flaked salt over a bitter ganache. Boxed in nine.",
+    "price": 745,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "caramel",
+      "roasted"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "sea-salt-dark-truffle",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Orange Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with blood orange zest and dark ganache. Boxed in nine.",
+    "price": 795,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "citrus",
+      "fruity"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "orange-truffle",
+    "image": "/assets/1720707243058.jpg"
+  },
+  {
+    "name": "Discovery Box",
+    "description": "A gift box of twelve squares across the whole range. Wrapped in the house ribbon and packed by hand.",
+    "price": 1295,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 144,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "discovery-box",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Signature Collection",
+    "description": "A gift box of the sixteen bars the house is known for. Wrapped in the house ribbon and packed by hand.",
+    "price": 1695,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 192,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "signature-collection",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "Dark Origins Flight",
+    "description": "A gift box of eight single origins, tasted side by side. Wrapped in the house ribbon and packed by hand.",
+    "price": 1495,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 96,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "dark-origins-flight",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Truffle Assortment",
+    "description": "A gift box of nine hand-rolled truffles in a lined case. Wrapped in the house ribbon and packed by hand.",
+    "price": 1195,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 108,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "truffle-assortment",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "The Grand Box",
+    "description": "A gift box of twenty-four pieces, the full atelier. Wrapped in the house ribbon and packed by hand.",
+    "price": 2495,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 288,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "the-grand-box",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Petite Gift",
+    "description": "A gift box of six squares in a ribboned sleeve. Wrapped in the house ribbon and packed by hand.",
+    "price": 795,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 72,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "petite-gift",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "Celebration Box",
+    "description": "A gift box of eighteen pieces for the occasions that deserve it. Wrapped in the house ribbon and packed by hand.",
+    "price": 1895,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 216,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "celebration-box",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Tasting Flight",
+    "description": "A gift box of ten graded percentages, low to high. Wrapped in the house ribbon and packed by hand.",
+    "price": 1395,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 120,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "tasting-flight",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "Midnight Selection",
+    "description": "A gift box of twelve dark pieces, nothing under 70%. Wrapped in the house ribbon and packed by hand.",
+    "price": 1595,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 144,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "midnight-selection",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Seasonal Reserve",
+    "description": "A gift box of fourteen pieces from this season only. Wrapped in the house ribbon and packed by hand.",
+    "price": 1795,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 168,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "seasonal-reserve",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "Chocolatier Choice",
+    "description": "A gift box of twenty pieces chosen by the head chocolatier. Wrapped in the house ribbon and packed by hand.",
+    "price": 2195,
+    "category": "gift-box",
+    "cocoaPercent": null,
+    "flavourNotes": [
+      "creamy",
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 240,
+    "vegan": false,
+    "glutenFree": false,
+    "slug": "chocolatier-choice",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "62% Dark Guatemala",
+    "description": "Single origin cacao from Guatemala, conched for seventy-two hours and tempered in small batches. Tastes of stewed fig and warm allspice.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "spiced",
+      "fruity"
+    ],
+    "origin": "Guatemala",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-guatemala",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "70% Dark Guatemala",
+    "description": "Single origin cacao from Guatemala, conched for seventy-two hours and tempered in small batches. Tastes of stewed fig and warm allspice.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "spiced",
+      "fruity"
+    ],
+    "origin": "Guatemala",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-guatemala",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "78% Dark Guatemala",
+    "description": "Single origin cacao from Guatemala, conched for seventy-two hours and tempered in small batches. Tastes of stewed fig and warm allspice.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "spiced",
+      "fruity"
+    ],
+    "origin": "Guatemala",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-guatemala",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "85% Dark Guatemala",
+    "description": "Single origin cacao from Guatemala, conched for seventy-two hours and tempered in small batches. Tastes of stewed fig and warm allspice.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "spiced",
+      "fruity"
+    ],
+    "origin": "Guatemala",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-guatemala",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "62% Dark Bolivia",
+    "description": "Single origin cacao from Bolivia, conched for seventy-two hours and tempered in small batches. Tastes of wild-harvested cacao, honeyed and light.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "nutty",
+      "floral"
+    ],
+    "origin": "Bolivia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-bolivia",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "70% Dark Bolivia",
+    "description": "Single origin cacao from Bolivia, conched for seventy-two hours and tempered in small batches. Tastes of wild-harvested cacao, honeyed and light.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "nutty",
+      "floral"
+    ],
+    "origin": "Bolivia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-bolivia",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "78% Dark Bolivia",
+    "description": "Single origin cacao from Bolivia, conched for seventy-two hours and tempered in small batches. Tastes of wild-harvested cacao, honeyed and light.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "nutty",
+      "floral"
+    ],
+    "origin": "Bolivia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-bolivia",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "85% Dark Bolivia",
+    "description": "Single origin cacao from Bolivia, conched for seventy-two hours and tempered in small batches. Tastes of wild-harvested cacao, honeyed and light.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "nutty",
+      "floral"
+    ],
+    "origin": "Bolivia",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-bolivia",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "62% Dark Java",
+    "description": "Single origin cacao from Java, conched for seventy-two hours and tempered in small batches. Tastes of molasses and a dark, smoky roast.",
+    "price": 395,
+    "category": "dark",
+    "cocoaPercent": 62,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Java",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "62-dark-java",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "70% Dark Java",
+    "description": "Single origin cacao from Java, conched for seventy-two hours and tempered in small batches. Tastes of molasses and a dark, smoky roast.",
+    "price": 459,
+    "category": "dark",
+    "cocoaPercent": 70,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Java",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "70-dark-java",
+    "image": "/assets/choco-bg.jpg"
+  },
+  {
+    "name": "78% Dark Java",
+    "description": "Single origin cacao from Java, conched for seventy-two hours and tempered in small batches. Tastes of molasses and a dark, smoky roast.",
+    "price": 523,
+    "category": "dark",
+    "cocoaPercent": 78,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Java",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "78-dark-java",
+    "image": "/assets/product1.jpg"
+  },
+  {
+    "name": "85% Dark Java",
+    "description": "Single origin cacao from Java, conched for seventy-two hours and tempered in small batches. Tastes of molasses and a dark, smoky roast.",
+    "price": 579,
+    "category": "dark",
+    "cocoaPercent": 85,
+    "flavourNotes": [
+      "roasted",
+      "caramel"
+    ],
+    "origin": "Java",
+    "weightGrams": 70,
+    "vegan": true,
+    "glutenFree": true,
+    "slug": "85-dark-java",
+    "image": "/assets/chocolate.jpg"
+  },
+  {
+    "name": "Almond Praline",
+    "description": "Milk chocolate, tempered by hand and finished with crushed almond praline in every square.",
+    "price": 455,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "nutty",
+      "caramel"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "almond-praline",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Salted Fudge",
+    "description": "Milk chocolate, tempered by hand and finished with soft fudge and a salted finish.",
+    "price": 475,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "caramel",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "salted-fudge",
+    "image": "/assets/1720608785720.jpg"
+  },
+  {
+    "name": "Banoffee",
+    "description": "Milk chocolate, tempered by hand and finished with dried banana and thick toffee.",
+    "price": 495,
+    "category": "milk",
+    "cocoaPercent": 38,
+    "flavourNotes": [
+      "fruity",
+      "caramel"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "banoffee",
+    "image": "/assets/product2.jpg"
+  },
+  {
+    "name": "Hazelnut White",
+    "description": "Cocoa butter white chocolate, tempered by hand and finished with roasted hazelnut through cocoa butter.",
+    "price": 515,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "nutty",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "hazelnut-white",
+    "image": "/assets/1721119564567.jpg"
+  },
+  {
+    "name": "Mango Chilli White",
+    "description": "Cocoa butter white chocolate, tempered by hand and finished with dried mango and a slow chilli heat.",
+    "price": 455,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "fruity",
+      "spiced"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "mango-chilli-white",
+    "image": "/assets/product3.jpg"
+  },
+  {
+    "name": "Coconut Lime White",
+    "description": "Cocoa butter white chocolate, tempered by hand and finished with toasted coconut and sharp lime zest.",
+    "price": 475,
+    "category": "white",
+    "cocoaPercent": 33,
+    "flavourNotes": [
+      "citrus",
+      "creamy"
+    ],
+    "origin": "Blended",
+    "weightGrams": 70,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "coconut-lime-white",
+    "image": "/assets/1721119564567.jpg"
+  },
+  {
+    "name": "Coffee Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with cold-brew ganache under a cocoa dusting. Boxed in nine.",
+    "price": 745,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "roasted",
+      "creamy"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "coffee-truffle",
+    "image": "/assets/1720707243058.jpg"
+  },
+  {
+    "name": "Honey Lavender Truffle",
+    "description": "A hand-rolled ganache truffle, set overnight and finished with lavender honey and a white ganache. Boxed in nine.",
+    "price": 745,
+    "category": "truffle",
+    "cocoaPercent": 55,
+    "flavourNotes": [
+      "floral",
+      "caramel"
+    ],
+    "origin": "Atelier",
+    "weightGrams": 135,
+    "vegan": false,
+    "glutenFree": true,
+    "slug": "honey-lavender-truffle",
+    "image": "/assets/product2.jpg"
+  }
+]

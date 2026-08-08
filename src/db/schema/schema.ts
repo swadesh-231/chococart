@@ -1,5 +1,14 @@
 import { sql } from 'drizzle-orm';
-import { index, integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import {
+    boolean,
+    index,
+    integer,
+    pgTable,
+    serial,
+    text,
+    timestamp,
+    varchar,
+} from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
     id: serial('id').primaryKey(),
@@ -27,6 +36,17 @@ export const products = pgTable('products', {
     // plain varchar rather than a pg enum so adding a type is a code change,
     // not a migration. Defaulted so rows written before it existed stay valid.
     category: varchar('category', { length: 20 }).notNull().default('dark'),
+    // The tasting detail the shop filters on. All nullable: a chocolate added
+    // through the admin form before these were filled in still lists fine, it
+    // just doesn't answer the matching filter.
+    cocoaPercent: integer('cocoa_percent'),
+    // A real Postgres text[], so "any of these notes" is one `&&` overlap in
+    // the query rather than a LIKE over a joined string.
+    flavourNotes: text('flavour_notes').array(),
+    origin: varchar('origin', { length: 60 }),
+    weightGrams: integer('weight_grams'),
+    vegan: boolean('vegan').notNull().default(false),
+    glutenFree: boolean('gluten_free').notNull().default(false),
     updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
     createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
 });

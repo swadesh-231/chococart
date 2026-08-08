@@ -1,9 +1,12 @@
 import { z } from 'zod';
 
+import { PRODUCT_CATEGORIES } from '@/lib/categories';
+
 const productFields = {
     name: z.string({ message: 'Product name should be a string' }).min(4),
     description: z.string({ message: 'Product description should be a string' }).min(8),
     price: z.number({ message: 'Product price should be a number' }).int().positive(),
+    category: z.enum(PRODUCT_CATEGORIES, { message: 'Pick a chocolate type' }),
 };
 
 /**

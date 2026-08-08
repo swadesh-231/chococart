@@ -10,7 +10,6 @@ import Testimonial from './_components/testimonial';
 import TrustBar from './_components/trust-bar';
 
 export const metadata: Metadata = {
-    title: 'Chococart — The Art of Pure Indulgence',
     description:
         "Bean to bar chocolate, tempered in small batches with the world's finest cacao and delivered to your door in ten minutes.",
 };

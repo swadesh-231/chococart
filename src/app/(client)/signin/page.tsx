@@ -6,7 +6,6 @@ import { getSession } from '@/lib/auth/session';
 import SignInForm from './signin-form';
 
 export const metadata: Metadata = {
-    title: 'Sign In — Chococart',
     description: 'Sign in to order chocolate and follow every delivery.',
 };
 
@@ -18,8 +17,10 @@ const promises = [
 
 export default async function SignInPage({ searchParams }: PageProps<'/signin'>) {
     const { callbackUrl, mode } = await searchParams;
+    // The shop is the point of having an account, so that's where signing in
+    // lands you unless the gate bounced you off a specific page.
     const redirectTo =
-        typeof callbackUrl === 'string' && callbackUrl.startsWith('/') ? callbackUrl : '/';
+        typeof callbackUrl === 'string' && callbackUrl.startsWith('/') ? callbackUrl : '/shop';
     // `?mode=signup` comes from the header's Sign up button.
     const defaultMode = mode === 'signup' ? 'signup' : 'signin';
 

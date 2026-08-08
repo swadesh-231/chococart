@@ -4,12 +4,18 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import { AlertCircle, ArrowRight, MapPin, Package } from 'lucide-react';
+import { AlertCircle, ArrowRight, Loader2, MapPin, Package, TimerReset } from 'lucide-react';
 
 import { Reveal } from '@/components/motion/reveal';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useCheckout } from '@/hooks/use-checkout';
 import { getMyOrders } from '@/lib/api';
 import { productImageSrc } from '@/lib/images';
+import {
+    formatCountdown,
+    millisRemaining,
+    RESERVATION_MINUTES,
+} from '@/lib/orders/reservation';
 import { cn, formatDate, formatPrice } from '@/lib/utils';
 import type { MyOrder, MyOrderGroup } from '@/types';
 import { BrandMark } from '../../_components/brand-mark';
@@ -24,6 +30,7 @@ const STAGE_LABEL: Record<string, string> = {
     shipped: 'Out for delivery',
     completed: 'Delivered',
     failed: 'Payment failed',
+    expired: 'Reservation expired',
 };
 
 const STATUS_TONE: Record<string, string> = {
@@ -33,7 +40,11 @@ const STATUS_TONE: Record<string, string> = {
     shipped: 'border-gold/60 text-copper',
     completed: 'border-cocoa-800/30 text-cocoa-800',
     failed: 'border-destructive/40 text-destructive',
+    expired: 'border-cocoa-400 text-cocoa-500',
 };
+
+/** Neither of these ever progressed, so they get a note instead of the rail. */
+const ENDED = ['failed', 'expired'];
 
 /**
  * A cart's lines are separate rows sharing a `groupId`. Fold them back into the
@@ -56,19 +67,29 @@ function groupOrders(rows: MyOrder[]): MyOrderGroup[] {
                 createdAt: row.createdAt,
                 address: row.address,
                 status: row.status,
+                reservedUntil: row.reservedUntil,
                 total: row.price,
                 lines: [row],
             });
         }
     }
 
-    // A group is only as far along as its least advanced line.
     for (const group of groups.values()) {
         const stages = group.lines.map((line) => line.status);
+
+        // A group is only as far along as its least advanced line, and a single
+        // ended line ends the whole order.
         group.status =
-            stages.find((status) => status === 'failed') ??
+            stages.find((status) => ENDED.includes(status)) ??
             STAGES.find((stage) => stages.includes(stage)) ??
             stages[0];
+
+        // The hold expires as soon as its shortest-lived line does.
+        group.reservedUntil = group.lines.reduce<string | null>((soonest, line) => {
+            if (!line.reservedUntil) return soonest;
+            if (!soonest) return line.reservedUntil;
+            return new Date(line.reservedUntil) < new Date(soonest) ? line.reservedUntil : soonest;
+        }, null);
     }
 
     return [...groups.values()];
@@ -86,7 +107,97 @@ function StatusPill({ status }: { status: string }) {
     );
 }
 
-/** Four-step progress rail. Hidden for failed orders, which never progressed. */
+/**
+ * Ticks once a second while a hold is live. Reading the clock during render
+ * would desync from the server anyway, so the deadline is the only shared
+ * truth — the server re-checks it before taking a payment.
+ */
+function useMillisRemaining(reservedUntil: string | null): number {
+    const [left, setLeft] = React.useState(() => millisRemaining(reservedUntil));
+
+    React.useEffect(() => {
+        if (!reservedUntil) return;
+
+        // No synchronous catch-up set here: the initialiser already read the
+        // clock at mount, and if the deadline is replaced the first tick
+        // corrects it a second later.
+        const id = setInterval(() => setLeft(millisRemaining(reservedUntil)), 1000);
+        return () => clearInterval(id);
+    }, [reservedUntil]);
+
+    return left;
+}
+
+/**
+ * The panel on an order that is placed but unpaid: how long the chocolate is
+ * still being held, and the way back into Razorpay.
+ */
+function PendingPayment({
+    group,
+    onPay,
+    onExpire,
+    busy,
+}: {
+    group: MyOrderGroup;
+    onPay: () => void;
+    onExpire: () => void;
+    busy: boolean;
+}) {
+    const left = useMillisRemaining(group.reservedUntil);
+    const lapsed = left <= 0;
+
+    // The row is only really expired once the server says so, so ask it to
+    // catch up the moment the clock runs out.
+    React.useEffect(() => {
+        if (lapsed) onExpire();
+    }, [lapsed, onExpire]);
+
+    return (
+        <div className="mt-5 border border-copper/30 bg-copper/5 px-5 py-5">
+            <div className="flex items-start gap-2.5">
+                <TimerReset
+                    className="mt-0.5 size-4 shrink-0 text-copper"
+                    strokeWidth={1.4}
+                    aria-hidden="true"
+                />
+                <div className="min-w-0 flex-1">
+                    <p className="eyebrow text-[0.5625rem] text-copper">
+                        {lapsed ? 'Releasing this order' : 'Payment pending'}
+                    </p>
+
+                    {lapsed ? (
+                        <p className="mt-2 text-[0.8rem] leading-relaxed text-cocoa-600">
+                            The hold has run out and this order is being released. Nothing was
+                            charged.
+                        </p>
+                    ) : (
+                        <>
+                            <p className="mt-2 text-[0.8rem] leading-relaxed text-cocoa-600">
+                                Your chocolate is held for{' '}
+                                <span className="tnum font-medium text-cocoa-800">
+                                    {formatCountdown(left)}
+                                </span>{' '}
+                                longer. Pay within that time and it ships; after it, the order is
+                                released and nothing is charged.
+                            </p>
+
+                            <button
+                                type="button"
+                                onClick={onPay}
+                                disabled={busy}
+                                className="eyebrow mt-4 inline-flex h-11 items-center justify-center gap-2.5 bg-cocoa-800 px-7 text-ivory transition-colors hover:bg-cocoa-900 disabled:opacity-60">
+                                {busy && <Loader2 className="size-3.5 animate-spin" />}
+                                {busy ? 'Opening' : `Complete payment — ${formatPrice(group.total)}`}
+                            </button>
+                        </>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/** Four-step progress rail. Hidden for ended orders, which never progressed. */
 function Progress({ status }: { status: string }) {
     const current = STAGES.indexOf(status as (typeof STAGES)[number]);
 
@@ -123,12 +234,24 @@ export default function MyOrdersPage() {
         isLoading,
         isError,
         error,
+        refetch,
     } = useQuery<MyOrder[]>({
         queryKey: ['my-orders'],
         queryFn: getMyOrders,
     });
 
     const groups = React.useMemo(() => groupOrders(myOrders ?? []), [myOrders]);
+
+    // Stable so the countdown's expiry effect doesn't refire every tick.
+    const reload = React.useCallback(() => {
+        void refetch();
+    }, [refetch]);
+
+    const { resumeCheckout, busy } = useCheckout({
+        description: 'Chococart order',
+        onPaid: reload,
+        onUnpaid: reload,
+    });
 
     return (
         <>
@@ -274,12 +397,39 @@ export default function MyOrdersPage() {
                                             </p>
                                         </div>
 
-                                        {group.status === 'failed' ? (
+                                        {group.status === 'failed' && (
                                             <p className="mt-5 text-[0.75rem] text-destructive">
                                                 Payment did not go through, so this order was
                                                 released. Nothing was charged.
                                             </p>
-                                        ) : (
+                                        )}
+
+                                        {group.status === 'expired' && (
+                                            <p className="mt-5 text-[0.75rem] text-cocoa-500">
+                                                This order was not paid for within{' '}
+                                                {RESERVATION_MINUTES} minutes, so the chocolate went
+                                                back on the shelf. Nothing was charged — you are
+                                                welcome to order it again.
+                                            </p>
+                                        )}
+
+                                        {/* Resuming is keyed by groupId, so orders
+                                            written before carts existed can only
+                                            run out their clock. */}
+                                        {group.status === 'reserved' &&
+                                            group.reservedUntil &&
+                                            group.lines[0].groupId && (
+                                                <PendingPayment
+                                                    group={group}
+                                                    busy={busy}
+                                                    onExpire={reload}
+                                                    onPay={() =>
+                                                        resumeCheckout(group.lines[0].groupId!)
+                                                    }
+                                                />
+                                            )}
+
+                                        {!ENDED.includes(group.status) && (
                                             <Progress status={group.status} />
                                         )}
                                     </footer>

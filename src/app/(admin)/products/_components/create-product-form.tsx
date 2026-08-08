@@ -14,8 +14,10 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { categoryLabel, DEFAULT_CATEGORY, PRODUCT_CATEGORIES } from '@/lib/categories';
 import { productFormSchema, type ProductFormValues } from '@/lib/validators/productSchema';
 
 export type FormValues = ProductFormValues;
@@ -35,6 +37,7 @@ const CreateProductForm = ({
             name: '',
             description: '',
             price: 0,
+            category: DEFAULT_CATEGORY,
         },
     });
 
@@ -119,6 +122,28 @@ const CreateProductForm = ({
                                         field.onChange(Number.isNaN(value) ? undefined : value);
                                     }}
                                 />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="category"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="eyebrow text-cocoa-600">Type</FormLabel>
+                            <FormControl>
+                                {/* className lands on the wrapper, so the box
+                                    stretches while `field` reaches the select. */}
+                                <NativeSelect className="w-full" {...field}>
+                                    {PRODUCT_CATEGORIES.map((category) => (
+                                        <NativeSelectOption key={category} value={category}>
+                                            {categoryLabel(category)}
+                                        </NativeSelectOption>
+                                    ))}
+                                </NativeSelect>
                             </FormControl>
                             <FormMessage />
                         </FormItem>

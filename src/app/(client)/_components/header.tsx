@@ -71,7 +71,9 @@ export default function Header() {
         router.refresh();
     };
 
-    const returnTo = pathname === '/signin' ? '/shop' : pathname;
+    // Signing in from the marketing pages is a shopper heading for the
+    // catalogue; anywhere else, put them back where they were.
+    const returnTo = pathname === '/signin' || pathname === '/' ? '/shop' : pathname;
     const signInHref = `/signin?callbackUrl=${encodeURIComponent(returnTo)}`;
     const signUpHref = `/signin?mode=signup&callbackUrl=${encodeURIComponent(returnTo)}`;
 

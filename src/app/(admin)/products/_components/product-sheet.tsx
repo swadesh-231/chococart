@@ -37,6 +37,7 @@ const ProductSheet = () => {
                 name: values.name,
                 description: values.description,
                 price: values.price,
+                category: values.category,
                 image: imageUrl,
             });
         },

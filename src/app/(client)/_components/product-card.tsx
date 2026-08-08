@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { categoryLabel } from '@/lib/categories';
 import { productImageSrc } from '@/lib/images';
 import { formatPrice } from '@/lib/utils';
 import type { Product } from '@/types';
@@ -50,6 +51,10 @@ export default function ProductCard({
             </Link>
 
             <div className="flex flex-1 flex-col items-center px-4 py-6 text-center">
+                <p className="eyebrow mb-2 text-[0.5rem] text-gold">
+                    {categoryLabel(product.category)}
+                </p>
+
                 <h3 className="font-heading text-xl leading-snug font-medium text-cocoa-800 sm:text-2xl">
                     <Link href={`/product/${product.id}`} className="hover:text-cocoa-950">
                         {product.name}

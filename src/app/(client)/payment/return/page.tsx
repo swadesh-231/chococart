@@ -5,7 +5,6 @@ import { AlertTriangle, ArrowRight, LifeBuoy } from 'lucide-react';
 import { BrandMark } from '../../_components/brand-mark';
 
 export const metadata: Metadata = {
-    title: 'Payment unsuccessful — Chococart',
     description: 'Your payment could not be completed. Nothing has been charged.',
 };
 

@@ -6,7 +6,6 @@ import { BrandMark } from '../_components/brand-mark';
 import ShopGrid from './_components/shop-grid';
 
 export const metadata: Metadata = {
-    title: 'The Collection — Chococart',
     description:
         'Every Chococart bar, tempered in small batches. Choose your flavour and add it to your cart.',
 };

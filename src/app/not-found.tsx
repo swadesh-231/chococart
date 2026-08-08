@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { BrandMark, Wordmark } from './(client)/_components/brand-mark';
 
 export const metadata: Metadata = {
-    title: 'Page not found — Chococart',
     description: 'The page you were looking for has melted away.',
 };
 

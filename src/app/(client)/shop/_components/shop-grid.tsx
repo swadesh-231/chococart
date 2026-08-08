@@ -7,6 +7,8 @@ import { AlertCircle, ChevronDown, Search, X } from 'lucide-react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { ApiError, getProducts } from '@/lib/api';
+import { categoryLabel, PRODUCT_CATEGORIES } from '@/lib/categories';
+import { cn } from '@/lib/utils';
 import type { Product } from '@/types';
 import ProductCard from '../../_components/product-card';
 
@@ -32,6 +34,7 @@ function badgeFor(product: Product, newest: number[]) {
 export default function ShopGrid() {
     const [query, setQuery] = React.useState('');
     const [sort, setSort] = React.useState<SortKey>('featured');
+    const [category, setCategory] = React.useState<string>('all');
 
     const { data, isLoading, isError, error } = useQuery<Product[]>({
         queryKey: ['products'],
@@ -48,21 +51,65 @@ export default function ShopGrid() {
         [data]
     );
 
+    /**
+     * Only the types actually stocked get a tab — an empty "White" tab is worse
+     * than no tab. House order is kept, with anything unrecognised last so a
+     * hand-edited row still reaches the shop.
+     */
+    const tabs = React.useMemo(() => {
+        const stocked = new Set((data ?? []).map((product) => product.category));
+        const known = PRODUCT_CATEGORIES.filter((name) => stocked.has(name));
+        const rest = [...stocked].filter(
+            (name) => !(PRODUCT_CATEGORIES as readonly string[]).includes(name)
+        );
+        return ['all', ...known, ...rest];
+    }, [data]);
+
+    // Sold out of the filtered type (or the catalogue changed under us) — fall
+    // back to everything rather than stranding the shopper on a dead tab.
+    const activeCategory = tabs.includes(category) ? category : 'all';
+
     const visible = React.useMemo(() => {
         const needle = query.trim().toLowerCase();
-        const filtered = (data ?? []).filter((product) =>
-            needle
+        const filtered = (data ?? []).filter((product) => {
+            if (activeCategory !== 'all' && product.category !== activeCategory) return false;
+            return needle
                 ? product.name.toLowerCase().includes(needle) ||
-                  (product.description ?? '').toLowerCase().includes(needle)
-                : true
-        );
+                      (product.description ?? '').toLowerCase().includes(needle)
+                : true;
+        });
 
         const compare = SORTS[sort].compare;
         return compare ? [...filtered].sort(compare) : filtered;
-    }, [data, query, sort]);
+    }, [data, query, sort, activeCategory]);
 
     return (
         <div className="shell py-14 lg:py-20">
+            {/* Two entries means "All" plus a single type — no choice to offer. */}
+            {tabs.length > 2 && (
+                <ul className="mb-6 flex flex-wrap items-center gap-2">
+                    {tabs.map((name) => {
+                        const selected = name === activeCategory;
+                        return (
+                            <li key={name}>
+                                <button
+                                    type="button"
+                                    onClick={() => setCategory(name)}
+                                    aria-pressed={selected}
+                                    className={cn(
+                                        'eyebrow border px-4 py-2.5 text-[0.5625rem] transition-colors',
+                                        selected
+                                            ? 'border-cocoa-800 bg-cocoa-800 text-ivory'
+                                            : 'border-border text-cocoa-600 hover:border-cocoa-400 hover:text-cocoa-900'
+                                    )}>
+                                    {name === 'all' ? 'All' : categoryLabel(name)}
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
+            )}
+
             <div className="flex flex-col gap-5 border-b border-border pb-6 sm:flex-row sm:items-center sm:justify-between">
                 <div className="relative sm:max-w-xs sm:flex-1">
                     <Search

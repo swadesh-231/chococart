@@ -23,6 +23,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCheckout } from '@/hooks/use-checkout';
 import { ApiError, getSingleProduct } from '@/lib/api';
 import { productImageSrc } from '@/lib/images';
+import { categoryLabel } from '@/lib/categories';
 import { formatPrice } from '@/lib/utils';
 import { deliverySchema, type DeliveryFormValues } from '@/lib/validators/orderSchema';
 import type { Product } from '@/types';
@@ -144,7 +145,7 @@ export default function ProductPage() {
                         product && (
                             <div className="flex flex-col">
                                 <span className="eyebrow text-cocoa-500">
-                                    Artisan chocolatier · Small batch
+                                    {categoryLabel(product.category)} · Small batch
                                 </span>
 
                                 <h1 className="display-2 mt-4 text-cocoa-800">{product.name}</h1>

@@ -1,3 +1,4 @@
+import { and, inArray } from 'drizzle-orm';
 import { validateWebhookSignature } from 'razorpay/dist/utils/razorpay-utils';
 import { db } from '@/db/db';
 import { orders } from '@/db/schema/schema';
@@ -53,12 +54,23 @@ export async function POST(request: Request) {
         }
 
         if (event.event === 'payment.captured' || event.event === 'order.paid') {
-            await db
+            // Same rule as /api/payment/verify: only a live hold (or an order
+            // already marked paid, for idempotency) converts to a sale.
+            const updated = await db
                 .update(orders)
-                .set({ status: 'paid', updatedAt: new Date() })
-                .where(ordersMatching(reference));
+                .set({ status: 'paid', updatedAt: new Date(), reservedUntil: null })
+                .where(
+                    and(ordersMatching(reference), inArray(orders.status, ['reserved', 'paid']))
+                )
+                .returning({ id: orders.id });
+
+            if (!updated.length) {
+                console.error(
+                    `POST /api/payment/webhook: ${event.event} for a released order — a refund is owed`
+                );
+            }
         } else if (event.event === 'payment.failed') {
-            await releaseOrders(await orderIdsFor(reference));
+            await releaseOrders(await orderIdsFor(reference), 'failed');
         }
 
         return Response.json({ message: 'OK' });

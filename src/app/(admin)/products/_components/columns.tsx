@@ -8,6 +8,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Badge } from '@/components/ui/badge';
+import { categoryLabel } from '@/lib/categories';
 import { formatPrice } from '@/lib/utils';
 import { Product } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
@@ -17,6 +19,13 @@ export const columns: ColumnDef<Product>[] = [
     {
         accessorKey: 'name',
         header: 'Name',
+    },
+    {
+        accessorKey: 'category',
+        header: 'Type',
+        cell: ({ row }) => (
+            <Badge variant="secondary">{categoryLabel(row.original.category)}</Badge>
+        ),
     },
     {
         accessorKey: 'price',

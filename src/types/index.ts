@@ -4,6 +4,8 @@ export interface Product {
     description: string | null;
     image: string | null;
     price: number;
+    /** One of `PRODUCT_CATEGORIES`; read through `categoryLabel` to display. */
+    category: string;
 }
 
 /** The signed-in customer's own account, as `/api/account/profile` returns it. */
@@ -90,12 +92,16 @@ export interface MyOrder {
     status: string;
     type: string | null;
     groupId: string | null;
+    /** When the hold on this line lapses. Null once paid, released or expired. */
+    reservedUntil: string | null;
     createdAt: string | null;
 }
 
 /** Order-history rows folded back into the cart they were checked out as. */
 export interface MyOrderGroup {
     key: string;
+    /** Null unless the group is awaiting payment; the soonest line deadline. */
+    reservedUntil: string | null;
     createdAt: string | null;
     address: string;
     status: string;
@@ -112,6 +118,8 @@ export interface CheckoutSession {
     amount: number | string;
     currency: string;
     keyId?: string;
+    /** Present when resuming: when the hold behind this payment runs out. */
+    expiresAt?: string;
     customer: {
         name: string;
         email: string;

@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery } from '@tanstack/react-query';
@@ -56,9 +57,18 @@ export default function CartView() {
         }
     }, [profile, setValue, getValues]);
 
+    const router = useRouter();
+
     const { checkout, busy } = useCheckout({
         description: `${count} ${count === 1 ? 'bar' : 'bars'} from Chococart`,
         onPaid: clear,
+        // The order is already placed and holding stock, so the cart has done
+        // its job — leaving it filled would only invite a second reservation
+        // for the same chocolate. The order itself is waiting in My Orders.
+        onUnpaid: () => {
+            clear();
+            router.push('/account/orders');
+        },
     });
 
     const onSubmit = (values: DeliveryFormValues) =>

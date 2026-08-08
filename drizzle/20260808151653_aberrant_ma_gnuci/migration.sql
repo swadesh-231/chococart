@@ -1,0 +1,1 @@
+ALTER TABLE "products" ADD COLUMN "category" varchar(20) DEFAULT 'dark' NOT NULL;

@@ -5,18 +5,26 @@ import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 
 import { toast } from '@/components/ui/toast';
-import { ApiError, placeOrder, verifyPayment } from '@/lib/api';
+import { ApiError, placeOrder, resumePayment, verifyPayment } from '@/lib/api';
+import { RESERVATION_MINUTES } from '@/lib/orders/reservation';
 import { openRazorpayCheckout } from '@/lib/razorpay-checkout';
 import type { CheckoutSession, OrderData, VerifyPaymentData } from '@/types';
 
 export function useCheckout({
     description,
     onPaid,
+    onUnpaid,
 }: {
     /** Shown as the order description inside the Razorpay modal. */
     description?: string;
     /** Runs after the payment is verified, before the redirect. */
     onPaid?: () => void;
+    /**
+     * Runs when the shopper closed the payment window, or when reopening one
+     * failed — the order is placed but unpaid either way. Not called when
+     * verification fails, which navigates to `/payment/return` on its own.
+     */
+    onUnpaid?: () => void;
 } = {}) {
     const router = useRouter();
     const [isPaying, setIsPaying] = React.useState(false);
@@ -74,7 +82,12 @@ export function useCheckout({
                 modal: {
                     ondismiss: () => {
                         setIsPaying(false);
-                        toast.add({ title: 'Payment cancelled', type: 'info' });
+                        toast.add({
+                            title: 'Payment cancelled',
+                            description: `Your order is held in My Orders for ${RESERVATION_MINUTES} minutes — you can finish paying there.`,
+                            type: 'info',
+                        });
+                        onUnpaid?.();
                     },
                 },
             });
@@ -93,8 +106,24 @@ export function useCheckout({
         onError: showError,
     });
 
+    /** Reopens payment for an order already placed and still inside its hold. */
+    const resume = useMutation({
+        mutationFn: (groupId: string) => resumePayment(groupId),
+        onSuccess: (session) => {
+            setIsPaying(true);
+            void startCheckout(session);
+        },
+        onError: (err) => {
+            showError(err);
+            // Usually the hold just lapsed, so let the caller refresh and show
+            // the order in its real state.
+            onUnpaid?.();
+        },
+    });
+
     return {
         checkout: order.mutate,
-        busy: order.isPending || isPaying || verify.isPending,
+        resumeCheckout: resume.mutate,
+        busy: order.isPending || resume.isPending || isPaying || verify.isPending,
     };
 }

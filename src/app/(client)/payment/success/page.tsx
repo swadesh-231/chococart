@@ -5,7 +5,6 @@ import { ArrowRight, Check, Package, Sparkles, Truck } from 'lucide-react';
 import { BrandMark } from '../../_components/brand-mark';
 
 export const metadata: Metadata = {
-    title: 'Order confirmed — Chococart',
     description: 'Your payment went through and your chocolate is on its way.',
 };
 

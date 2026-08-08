@@ -4,7 +4,6 @@ import { BrandMark } from '../_components/brand-mark';
 import CartView from './_components/cart-view';
 
 export const metadata: Metadata = {
-    title: 'Your Cart — Chococart',
     description: 'Review your chocolates and complete your order.',
 };
 

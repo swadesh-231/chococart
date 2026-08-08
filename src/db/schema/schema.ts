@@ -23,6 +23,10 @@ export const products = pgTable('products', {
     image: text('image'),
     description: text('description'),
     price: integer('price').notNull(),
+    // Which kind of chocolate this is — see `PRODUCT_CATEGORIES`. Kept as a
+    // plain varchar rather than a pg enum so adding a type is a code change,
+    // not a migration. Defaulted so rows written before it existed stay valid.
+    category: varchar('category', { length: 20 }).notNull().default('dark'),
     updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
     createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
 });
@@ -58,6 +62,10 @@ export const orders = pgTable(
         // they can be paid for, released and shown as a single order. Null on
         // rows written before the cart existed.
         groupId: varchar('group_id', { length: 36 }),
+        // The moment this reservation stops holding its stock. Set while the
+        // order is `reserved` and cleared once it is paid or released, so a
+        // non-null value here always means "payment is still outstanding".
+        reservedUntil: timestamp('reserved_until'),
         updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
         createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
     },

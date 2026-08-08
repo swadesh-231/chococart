@@ -3,7 +3,8 @@ import { and, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { db } from '@/db/db';
 import { deliveryPersons, inventories, orders, products, users, warehouses } from '@/db/schema/schema';
 import { requireUser } from '@/lib/auth/session';
-import { releaseOrders } from '@/lib/orders/group';
+import { expireStaleReservations, releaseOrders } from '@/lib/orders/group';
+import { reservationDeadline } from '@/lib/orders/reservation';
 import {
     APP_ORDER_GROUP_NOTE_KEY,
     APP_ORDER_NOTE_KEY,
@@ -26,6 +27,12 @@ export async function POST(request: Request) {
     }
 
     const { items, address, pincode } = parsed.data;
+
+    // Reclaim lapsed holds first — the chocolate this shopper wants may be
+    // sitting behind somebody's abandoned checkout.
+    await expireStaleReservations().catch((err) =>
+        console.error('POST /api/orders (sweep)', err)
+    );
 
     const [warehouse] = await db
         .select({ id: warehouses.id })
@@ -143,9 +150,15 @@ export async function POST(request: Request) {
                 .set({ orderId: created[0] })
                 .where(eq(deliveryPersons.id, deliveryPerson.id));
 
+            // The clock starts once the stock is actually held, not when the
+            // request arrived, so a slow transaction never eats into the window.
             await tx
                 .update(orders)
-                .set({ status: 'reserved', updatedAt: new Date() })
+                .set({
+                    status: 'reserved',
+                    updatedAt: new Date(),
+                    reservedUntil: reservationDeadline(),
+                })
                 .where(eq(orders.groupId, groupId));
 
             return created;

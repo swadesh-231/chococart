@@ -2,10 +2,17 @@ import { desc, eq } from 'drizzle-orm';
 import { db } from '@/db/db';
 import { orders, products } from '@/db/schema/schema';
 import { requireUser } from '@/lib/auth/session';
+import { expireStaleReservations } from '@/lib/orders/group';
 
 export async function GET() {
     const appUser = await requireUser();
     if (appUser instanceof Response) return appUser;
+
+    // Sweep before reading so a lapsed hold is shown as expired rather than as
+    // an order the shopper could still pay for.
+    await expireStaleReservations().catch((err) =>
+        console.error('GET /api/orders/history (sweep)', err)
+    );
 
     try {
         const myOrders = await db
@@ -21,6 +28,7 @@ export async function GET() {
                 status: orders.status,
                 address: orders.address,
                 groupId: orders.groupId,
+                reservedUntil: orders.reservedUntil,
                 createdAt: orders.createdAt,
             })
             .from(orders)

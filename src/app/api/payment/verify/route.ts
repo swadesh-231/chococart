@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, inArray } from 'drizzle-orm';
 import { z } from 'zod';
 import { db } from '@/db/db';
 import { orders } from '@/db/schema/schema';
@@ -57,15 +57,50 @@ export async function POST(request: Request) {
     }
 
     try {
-        // Scoped to the signed-in user, so every row in the group must be theirs.
+        // Scoped to the signed-in user, so every row in the group must be
+        // theirs, and to holds that are still live. `paid` is allowed through so
+        // a webhook that got here first doesn't make this look like a failure.
+        //
+        // Deliberately not swept first: expiry governs whether a payment may be
+        // *started*, and a shopper who tapped Pay with seconds to spare should
+        // not be punished for the bank taking a moment to answer.
         const updated = await db
             .update(orders)
-            .set({ status: 'paid', updatedAt: new Date() })
-            .where(and(ordersMatching(reference), eq(orders.userId, appUser.id)))
+            .set({ status: 'paid', updatedAt: new Date(), reservedUntil: null })
+            .where(
+                and(
+                    ordersMatching(reference),
+                    eq(orders.userId, appUser.id),
+                    inArray(orders.status, ['reserved', 'paid'])
+                )
+            )
             .returning({ id: orders.id });
 
         if (!updated.length) {
-            return Response.json({ message: 'Unknown order' }, { status: 404 });
+            const [existing] = await db
+                .select({ status: orders.status })
+                .from(orders)
+                .where(and(ordersMatching(reference), eq(orders.userId, appUser.id)))
+                .limit(1);
+
+            if (!existing) {
+                return Response.json({ message: 'Unknown order' }, { status: 404 });
+            }
+
+            // The order exists but is past paying for, which means money may
+            // have been taken for stock already given away. Loud on purpose.
+            console.error(
+                `POST /api/payment/verify: payment ${razorpay_payment_id} landed on an order ` +
+                    `already marked "${existing.status}" — a refund is owed`
+            );
+
+            return Response.json(
+                {
+                    message:
+                        'The hold on this order ran out before the payment landed. Anything charged will be refunded.',
+                },
+                { status: 409 }
+            );
         }
 
         return Response.json({

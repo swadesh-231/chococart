@@ -105,6 +105,14 @@ export function placeOrder(data: OrderData) {
     });
 }
 
+/** Reopens Razorpay for an order that was placed but never paid for. */
+export function resumePayment(groupId: string) {
+    return request<CheckoutSession>('/api/payment/resume', {
+        method: 'POST',
+        body: JSON.stringify({ groupId }),
+    });
+}
+
 export function verifyPayment(data: VerifyPaymentData) {
     return request<{ message: string; orderId: number; orderIds: number[] }>(
         '/api/payment/verify',

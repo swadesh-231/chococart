@@ -3,49 +3,55 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 import { Reveal } from '@/components/motion/reveal';
-import { BrandMark } from './brand-mark';
 
 export default function Story() {
     return (
-        <section id="story" className="scroll-mt-28">
-            <div className="grid lg:grid-cols-2">
-                <div className="flex flex-col justify-center bg-cocoa-800 px-6 py-20 text-ivory md:px-14 lg:py-28">
-                    <Reveal className="mx-auto w-full max-w-md" direction="right">
-                        <span className="eyebrow text-gold">Our Story</span>
-                        <h2 className="display-2 mt-5">
-                            Rooted in Tradition.
+        <section id="story" className="scroll-mt-24 bg-cream">
+            <div className="shell py-24 lg:py-32">
+                {/* Asymmetric on purpose: the photograph takes the left half
+                    and the copy sits a little below centre, hard against the
+                    right edge, with a whole column of air between them. */}
+                <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-x-8">
+                    <Reveal className="lg:col-span-6">
+                        <div className="relative aspect-4/5 w-full overflow-hidden bg-ivory-dim sm:aspect-3/2 lg:aspect-square">
+                            <Image
+                                src="/assets/choco-bg.jpg"
+                                alt="Truffles and pralines laid out on marble in the atelier"
+                                fill
+                                sizes="(min-width: 1024px) 49vw, 100vw"
+                                className="object-cover"
+                            />
+                        </div>
+                    </Reveal>
+
+                    <Reveal
+                        delay={0.08}
+                        className="lg:col-span-5 lg:col-start-8 lg:mt-16"
+                        direction="left">
+                        <p className="eyebrow text-caramel">Why we make it</p>
+
+                        <h2 className="display-2 mt-6 text-cocoa-950">
+                            Chocolate should
                             <br />
-                            Driven by Passion.
+                            feel personal.
                         </h2>
-                        <p className="prose-body mt-7 text-ivory/70">
-                            Chococart began with one stubborn belief: that great chocolate should
-                            never have to travel far to reach you. We temper in small batches at
-                            neighbourhood ateliers, so every bar arrives with its snap and its
-                            shine intact.
+
+                        <p className="prose-body mt-7 text-cocoa-600">
+                            Small-batch chocolate, made carefully and delivered thoughtfully. We
+                            temper in neighbourhood ateliers so every bar reaches you with its snap
+                            and its shine intact.
                         </p>
-                        <p className="prose-body mt-4 text-ivory/70">
-                            From bean to bar, every step is guided by patience, precision and
-                            purpose — and nothing leaves the marble until it earns its wrapper.
-                        </p>
+
                         <Link
-                            href="#craft"
-                            className="eyebrow link-underline mt-9 inline-flex items-center gap-3 text-gold">
-                            See how it is made
-                            <ArrowRight className="size-3.5" />
+                            href="#signature"
+                            className="eyebrow link-underline group mt-10 inline-flex items-center gap-3 text-cocoa-800">
+                            See the signature box
+                            <ArrowRight
+                                className="size-3.5 transition-transform duration-500 group-hover:translate-x-1"
+                                strokeWidth={1.5}
+                            />
                         </Link>
                     </Reveal>
-                </div>
-
-                <div className="relative min-h-[22rem] lg:min-h-full">
-                    <Image
-                        src="/assets/product3.jpg"
-                        alt="Layers of dark chocolate with a raspberry ganache centre"
-                        fill
-                        sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-cocoa-950/12" />
-                    <BrandMark className="absolute right-8 bottom-8 h-14 text-ivory/50" />
                 </div>
             </div>
         </section>

@@ -1,30 +1,26 @@
 import type { Metadata } from 'next';
 
-import Craft from './_components/craft';
-import CollectionTeaser from './_components/collection-teaser';
+import Delivery from './_components/delivery';
+import Featured from './_components/featured';
+import FinalCta from './_components/final-cta';
 import Hero from './_components/hero';
-import Journal from './_components/journal';
-import NewsLetter from './_components/newsleter';
+import Signature from './_components/signature';
 import Story from './_components/story';
-import Testimonial from './_components/testimonial';
-import TrustBar from './_components/trust-bar';
 
 export const metadata: Metadata = {
     description:
-        "Bean to bar chocolate, tempered in small batches with the world's finest cacao and delivered to your door in ten minutes.",
+        'Thoughtfully crafted chocolate, made in small batches and delivered fresh to your door.',
 };
 
 export default function HomePage() {
     return (
         <>
             <Hero />
-            <TrustBar />
-            <CollectionTeaser />
+            <Featured />
             <Story />
-            <Craft />
-            <Testimonial />
-            <Journal />
-            <NewsLetter />
+            <Signature />
+            <Delivery />
+            <FinalCta />
         </>
     );
 }

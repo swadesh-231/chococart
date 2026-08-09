@@ -36,7 +36,10 @@ export default function ProductCard({
     badge?: string | null;
 }) {
     return (
-        <article className="group flex h-full flex-col border border-transparent bg-card transition-shadow duration-500 hover:shadow-e-md">
+        // `rounded-xl` is 0.35rem in this theme — the radius scale is built on
+        // the house's near-square `--radius: 0.25rem` — so the corner is set
+        // explicitly to the 14px a shopping card actually wants.
+        <article className="group flex h-full flex-col overflow-hidden rounded-[0.875rem] border border-border/70 bg-card transition-[box-shadow,transform] duration-500 hover:-translate-y-0.5 hover:border-border hover:shadow-e-md">
             {/* The bag button sits over the photograph rather than inside the
                 link, so adding to the cart never navigates to the product. */}
             <div className="relative aspect-4/5 w-full overflow-hidden bg-ivory-dim">
@@ -48,13 +51,13 @@ export default function ProductCard({
                         src={productImageSrc(product.image)}
                         alt={product.name}
                         fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                        sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 21vw, 45vw"
+                        className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-103"
                     />
                 </Link>
 
                 {badge && (
-                    <span className="eyebrow pointer-events-none absolute top-3 left-3 bg-ivory/95 px-2.5 py-1.5 text-[0.5rem] text-cocoa-800">
+                    <span className="eyebrow pointer-events-none absolute top-2 left-2 rounded-full bg-ivory/95 px-2.5 py-1 text-[0.4375rem] text-cocoa-800">
                         {badge}
                     </span>
                 )}
@@ -64,26 +67,35 @@ export default function ProductCard({
                 <AddToCart
                     product={product}
                     variant="icon"
-                    className="absolute right-3 bottom-3 z-10"
+                    className="absolute right-2 bottom-2 z-10 size-9 rounded-full"
                 />
             </div>
 
-            <div className="flex flex-1 flex-col items-center px-4 py-5 text-center">
-                <p className="eyebrow mb-2 text-[0.5rem] text-gold">
+            <div className="flex flex-1 flex-col p-3.5">
+                <p className="eyebrow text-[0.4375rem] text-caramel">
                     {categoryLabel(product.category)}
                 </p>
 
-                <h3 className="font-heading text-xl leading-snug font-medium text-cocoa-800 sm:text-2xl">
-                    <Link href={`/product/${product.id}`} className="hover:text-cocoa-950">
+                {/* Exactly two lines, always: clamped so a long box name cannot
+                    push the row out of line, and reserved so a short one still
+                    leaves the notes beneath it where its neighbours' are. */}
+                <h3 className="mt-1.5 min-h-[2lh] font-heading text-[0.9375rem] leading-snug font-medium text-cocoa-950 sm:text-base">
+                    <Link
+                        href={`/product/${product.id}`}
+                        className="line-clamp-2 transition-colors hover:text-cocoa-700">
                         {product.name}
                     </Link>
                 </h3>
 
-                <p className="eyebrow mt-2 text-[0.5rem] text-cocoa-500">
+                <p className="mt-1 line-clamp-1 text-[0.7rem] text-cocoa-500">
                     {notesFor(product).join(' · ')}
                 </p>
 
-                <p className="tnum mt-3 text-sm text-cocoa-700">{formatPrice(product.price)}</p>
+                {/* Pushed to the bottom so prices sit on one line across a row
+                    whatever the names above them do. */}
+                <p className="tnum mt-auto pt-2.5 text-[0.8125rem] text-cocoa-800">
+                    {formatPrice(product.price)}
+                </p>
             </div>
         </article>
     );

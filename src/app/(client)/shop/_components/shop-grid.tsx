@@ -41,15 +41,20 @@ function useDebounced<T>(value: T, delay = 300): T {
     return settled;
 }
 
-function GridSkeleton({ count = 6 }: { count?: number }) {
+/** Mirrors the card: left-aligned, four across on a wide screen. */
+function GridSkeleton({ count = 8 }: { count?: number }) {
     return (
         <>
             {Array.from({ length: count }).map((_, index) => (
-                <li key={index} className="flex flex-col gap-4">
+                <li
+                    key={index}
+                    className="overflow-hidden rounded-[0.875rem] border border-border/70 bg-card">
                     <Skeleton className="aspect-4/5 w-full rounded-none bg-cocoa-100" />
-                    <Skeleton className="mx-auto h-5 w-2/3 rounded-none bg-cocoa-100" />
-                    <Skeleton className="mx-auto h-3 w-1/2 rounded-none bg-cocoa-100" />
-                    <Skeleton className="mx-auto h-4 w-16 rounded-none bg-cocoa-100" />
+                    <div className="flex flex-col gap-2.5 p-3.5">
+                        <Skeleton className="h-4 w-3/4 rounded-none bg-cocoa-100" />
+                        <Skeleton className="h-2.5 w-1/2 rounded-none bg-cocoa-100" />
+                        <Skeleton className="h-3 w-12 rounded-none bg-cocoa-100" />
+                    </div>
                 </li>
             ))}
         </>
@@ -272,7 +277,7 @@ export default function ShopGrid({ initialFilters }: { initialFilters: ShopFilte
                         <>
                             <motion.ul
                                 className={cn(
-                                    'mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3',
+                                    'mt-10 grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-3 xl:grid-cols-4',
                                     // A refetch under new filters dims the old
                                     // results instead of flashing the page empty.
                                     isFetching && !isFetchingNextPage && !isLoading && 'opacity-60'
@@ -309,7 +314,7 @@ export default function ShopGrid({ initialFilters }: { initialFilters: ShopFilte
                                     ))
                                 )}
 
-                                {isFetchingNextPage && <GridSkeleton count={3} />}
+                                {isFetchingNextPage && <GridSkeleton count={4} />}
                             </motion.ul>
 
                             {/* Tripwire for the next page. */}

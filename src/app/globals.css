@@ -6,42 +6,49 @@
 
 /* ---------------------------------------------------------------------------
    Chococart brand system
-   Palette   deep cocoa #3B2A20 · ivory cream #F7F3EC · champagne gold #D4AF37
-             warm beige #E7DCC6 · copper #B87333
-   Type      Cormorant Garamond (display) · Montserrat (UI/body)
+   Palette   dark cocoa #241714 · chocolate #3A211B · cream #F4EBDD
+             ivory #FBF8F2 · caramel #A66A3F · muted #806F67 · border #DED3C8
+   Type      Cormorant Garamond (display) · Geist (UI/body)
    --------------------------------------------------------------------------- */
 
 @theme {
-  /* Cocoa ramp, built around Deep Cocoa at 800. */
-  --color-cocoa-50: #faf7f3;
-  --color-cocoa-100: #f0e9e1;
-  --color-cocoa-200: #dfd2c4;
-  --color-cocoa-300: #c4b09c;
-  --color-cocoa-400: #a08972;
-  --color-cocoa-500: #7e6853;
-  --color-cocoa-600: #63503f;
-  --color-cocoa-700: #4e3e30;
-  --color-cocoa-800: #3b2a20;
-  --color-cocoa-900: #2a1d16;
-  --color-cocoa-950: #1a120d;
+  /* Cocoa ramp, anchored on the three palette browns: muted at 500,
+     chocolate at 800 and dark cocoa at 950. */
+  --color-cocoa-50: #fbf8f2;
+  --color-cocoa-100: #f4ebdd;
+  --color-cocoa-200: #ded3c8;
+  --color-cocoa-300: #c4b5a7;
+  --color-cocoa-400: #a09186;
+  --color-cocoa-500: #806f67;
+  --color-cocoa-600: #5f4f47;
+  --color-cocoa-700: #4a352d;
+  --color-cocoa-800: #3a211b;
+  --color-cocoa-900: #2e1a16;
+  --color-cocoa-950: #241714;
 
   /* `brown-*` is kept as an alias so existing markup stays on-brand. */
-  --color-brown-50: #faf7f3;
-  --color-brown-100: #f0e9e1;
-  --color-brown-200: #dfd2c4;
-  --color-brown-300: #c4b09c;
-  --color-brown-400: #a08972;
-  --color-brown-500: #7e6853;
-  --color-brown-600: #63503f;
-  --color-brown-700: #4e3e30;
-  --color-brown-800: #3b2a20;
-  --color-brown-900: #2a1d16;
-  --color-brown-950: #1a120d;
+  --color-brown-50: #fbf8f2;
+  --color-brown-100: #f4ebdd;
+  --color-brown-200: #ded3c8;
+  --color-brown-300: #c4b5a7;
+  --color-brown-400: #a09186;
+  --color-brown-500: #806f67;
+  --color-brown-600: #5f4f47;
+  --color-brown-700: #4a352d;
+  --color-brown-800: #3a211b;
+  --color-brown-900: #2e1a16;
+  --color-brown-950: #241714;
 
-  --color-ivory: #f7f3ec;
-  --color-ivory-dim: #efe9df;
-  --color-gold: #d4af37;
-  --color-gold-soft: #e3c766;
+  --color-ivory: #fbf8f2;
+  /* The cream band that alternates with ivory down the page. */
+  --color-cream: #f4ebdd;
+  --color-ivory-dim: #f4ebdd;
+  --color-caramel: #a66a3f;
+  --color-caramel-soft: #c08a5e;
+  /* `gold-*` is kept as an alias so the shop, cart and account pages pick the
+     new accent up without a colour rename running through their markup. */
+  --color-gold: #a66a3f;
+  --color-gold-soft: #c08a5e;
   --color-beige: #e7dcc6;
   --color-copper: #b87333;
 
@@ -56,7 +63,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-montserrat);
+  --font-sans: var(--font-geist);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-cormorant);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -98,73 +105,73 @@
 }
 
 :root {
-  --background: #f7f3ec;
-  --foreground: #3b2a20;
+  --background: #fbf8f2;
+  --foreground: #3a211b;
   --card: #fffdfa;
-  --card-foreground: #3b2a20;
+  --card-foreground: #3a211b;
   --popover: #fffdfa;
-  --popover-foreground: #3b2a20;
-  --primary: #3b2a20;
-  --primary-foreground: #f7f3ec;
+  --popover-foreground: #3a211b;
+  --primary: #3a211b;
+  --primary-foreground: #fbf8f2;
   --secondary: #e7dcc6;
-  --secondary-foreground: #3b2a20;
-  --muted: #efe9df;
-  --muted-foreground: #7e6853;
+  --secondary-foreground: #3a211b;
+  --muted: #f4ebdd;
+  --muted-foreground: #806f67;
   --accent: #e7dcc6;
-  --accent-foreground: #3b2a20;
+  --accent-foreground: #3a211b;
   --destructive: #a3402f;
-  --border: #e0d6c7;
-  --input: #ddd2c1;
-  --ring: #d4af37;
-  --chart-1: #3b2a20;
-  --chart-2: #7e6853;
-  --chart-3: #b87333;
+  --border: #ded3c8;
+  --input: #d5c9bc;
+  --ring: #a66a3f;
+  --chart-1: #3a211b;
+  --chart-2: #806f67;
+  --chart-3: #a66a3f;
   --chart-4: #d4af37;
-  --chart-5: #c4b09c;
+  --chart-5: #c4b5a7;
   /* The reference is understated — corners stay nearly square. */
   --radius: 0.25rem;
-  --sidebar: #f2ece2;
-  --sidebar-foreground: #3b2a20;
-  --sidebar-primary: #3b2a20;
-  --sidebar-primary-foreground: #f7f3ec;
+  --sidebar: #f4ebdd;
+  --sidebar-foreground: #3a211b;
+  --sidebar-primary: #3a211b;
+  --sidebar-primary-foreground: #fbf8f2;
   --sidebar-accent: #e7dcc6;
-  --sidebar-accent-foreground: #3b2a20;
-  --sidebar-border: #e0d6c7;
-  --sidebar-ring: #d4af37;
+  --sidebar-accent-foreground: #3a211b;
+  --sidebar-border: #ded3c8;
+  --sidebar-ring: #a66a3f;
 }
 
 .dark {
-  --background: #1a120d;
-  --foreground: #f0e9e1;
-  --card: #241811;
-  --card-foreground: #f0e9e1;
-  --popover: #241811;
-  --popover-foreground: #f0e9e1;
+  --background: #241714;
+  --foreground: #f4ebdd;
+  --card: #2e1a16;
+  --card-foreground: #f4ebdd;
+  --popover: #2e1a16;
+  --popover-foreground: #f4ebdd;
   --primary: #e7dcc6;
-  --primary-foreground: #2a1d16;
-  --secondary: #3b2a20;
-  --secondary-foreground: #f0e9e1;
-  --muted: #2f2118;
-  --muted-foreground: #c4b09c;
-  --accent: #3b2a20;
-  --accent-foreground: #f0e9e1;
+  --primary-foreground: #241714;
+  --secondary: #3a211b;
+  --secondary-foreground: #f4ebdd;
+  --muted: #3a211b;
+  --muted-foreground: #c4b5a7;
+  --accent: #3a211b;
+  --accent-foreground: #f4ebdd;
   --destructive: #d2705c;
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
-  --ring: #d4af37;
+  --ring: #c08a5e;
   --chart-1: #e7dcc6;
-  --chart-2: #c4b09c;
-  --chart-3: #b87333;
+  --chart-2: #c4b5a7;
+  --chart-3: #a66a3f;
   --chart-4: #d4af37;
-  --chart-5: #7e6853;
-  --sidebar: #241811;
-  --sidebar-foreground: #f0e9e1;
-  --sidebar-primary: #d4af37;
-  --sidebar-primary-foreground: #2a1d16;
-  --sidebar-accent: #3b2a20;
-  --sidebar-accent-foreground: #f0e9e1;
+  --chart-5: #806f67;
+  --sidebar: #2e1a16;
+  --sidebar-foreground: #f4ebdd;
+  --sidebar-primary: #c08a5e;
+  --sidebar-primary-foreground: #241714;
+  --sidebar-accent: #3a211b;
+  --sidebar-accent-foreground: #f4ebdd;
   --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: #d4af37;
+  --sidebar-ring: #c08a5e;
 }
 
 @layer base {
@@ -175,8 +182,8 @@
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
-    /* Montserrat's default figures are lining already; this keeps them tabular
-       in prices and totals so columns of money line up. */
+    /* Geist's default figures are lining already; `tnum` opts prices and
+       totals into tabular ones so columns of money line up. */
     font-variant-numeric: normal;
   }
   html {
@@ -197,12 +204,13 @@
     font-optical-sizing: auto;
   }
   ::selection {
-    background-color: var(--color-gold);
-    color: var(--color-cocoa-900);
+    background-color: var(--color-beige);
+    color: var(--color-cocoa-950);
   }
-  /* The reference keeps focus rings understated but always visible. */
+  /* The reference keeps focus rings understated but always visible. Caramel
+     rather than gold — gold all but disappears against a cream ground. */
   :focus-visible {
-    outline: 2px solid var(--color-gold);
+    outline: 2px solid var(--color-caramel);
     outline-offset: 2px;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -255,14 +263,15 @@
   max-width: 34rem;
 }
 
-/* Tabular figures for prices, totals and quantities. */
+/* Tabular figures for prices, totals and quantities. Lining too: Cormorant
+   defaults to old-style figures, which drop below the baseline in a price. */
 @utility tnum {
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* Wide-tracked small-caps label used above headings and inside buttons. */
 @utility eyebrow {
-  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -273,12 +282,12 @@
   min-height: calc(100vh - 6rem);
 }
 
-/* Thin gold rule used as a section divider. */
+/* Thin caramel rule used as a section divider. */
 @utility rule-gold {
   background-image: linear-gradient(
     to right,
     transparent,
-    var(--color-gold) 50%,
+    var(--color-caramel) 50%,
     transparent
   );
   height: 1px;
@@ -324,15 +333,15 @@
   }
 }
 
-/* Gold foil treatment for the wordmark on dark grounds. */
+/* Foil treatment for the wordmark on dark grounds. */
 @utility text-foil {
   background-image: linear-gradient(
     100deg,
-    #b8912c 0%,
-    var(--color-gold) 30%,
-    #f0dc9a 50%,
-    var(--color-gold) 70%,
-    #b8912c 100%
+    #8a542f 0%,
+    var(--color-caramel) 30%,
+    #d9a97d 50%,
+    var(--color-caramel) 70%,
+    #8a542f 100%
   );
   background-clip: text;
   color: transparent;

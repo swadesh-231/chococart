@@ -24,31 +24,36 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet';
 import { authClient, useSession } from '@/lib/auth/auth-client';
+import { categoryLabel, PRODUCT_CATEGORIES } from '@/lib/categories';
 import { cn, initialsOf } from '@/lib/utils';
 import { BrandMark, Wordmark } from './brand-mark';
 import CartSheet from './cart-sheet';
 
 /**
- * Signed out, the header sells the house: these all live on the landing page.
- * Signed in they disappear entirely — an account holder came to buy chocolate,
- * not to read the story again.
+ * Signed out, the bar sells the house: these all live on the landing page, and
+ * the sign-in and sign-up buttons sit on the right.
  */
 const marketingNav = [
+    { label: 'Shop', href: '/shop' },
+    { label: 'Collections', href: '/shop?category=gift-box' },
     { label: 'Our Story', href: '/#story' },
-    { label: 'The Craft', href: '/#craft' },
-    { label: 'Journal', href: '/#journal' },
 ];
 
 /**
- * Signed in there is no navigation bar at all. The lockup goes to the shop,
- * types are chosen from the shop's own filter rail, and the account menu holds
- * the profile and order history — so the header is down to who you are and
- * what is in your bag.
+ * Signed in there is no marketing left in the bar — an account holder came to
+ * buy chocolate, not to read the story again. What they get instead is the
+ * shelf itself, so any type is one click away from any page.
  */
-const memberNav: { label: string; href: string }[] = [];
+const memberNav = [
+    { label: 'All', href: '/shop' },
+    ...PRODUCT_CATEGORIES.map((category) => ({
+        label: categoryLabel(category),
+        href: `/shop?category=${category}`,
+    })),
+];
 
-/** True while the page is scrolled far enough to warrant the compact bar. */
-function useScrolled(threshold = 12) {
+/** True while the page is scrolled far enough to warrant the solid bar. */
+function useScrolled(threshold = 24) {
     const [scrolled, setScrolled] = React.useState(false);
 
     React.useEffect(() => {
@@ -70,6 +75,12 @@ export default function Header() {
 
     const signedIn = Boolean(session);
     const displayName = session?.user.name?.trim() || session?.user.email || '';
+
+    // Only the landing page opens on a hero for the bar to float over; every
+    // other page starts at the top of its own content and needs the bar solid
+    // and in flow from the first pixel.
+    const overHero = pathname === '/';
+    const transparent = overHero && !scrolled && !mobileOpen;
 
     const handleSignOut = async () => {
         await authClient.signOut();
@@ -98,31 +109,28 @@ export default function Header() {
     };
 
     return (
-        <header className="sticky top-0 z-50">
-            <div className="flex h-9 items-center justify-center bg-cocoa-900 px-4 text-center">
-                <span className="eyebrow text-[0.5625rem] text-ivory/75 sm:text-[0.625rem]">
-                    Complimentary delivery on every order · Ready in ten minutes
-                </span>
-            </div>
-
+        <header
+            className={cn(
+                'z-50 w-full transition-colors duration-500',
+                overHero ? 'fixed inset-x-0 top-0' : 'sticky top-0',
+                transparent
+                    ? 'border-b border-transparent bg-transparent'
+                    : 'border-b border-border bg-ivory/92 backdrop-blur'
+            )}>
             <div
                 className={cn(
-                    'border-b border-border/70 bg-background/90 backdrop-blur transition-shadow duration-300',
-                    scrolled && 'shadow-e-sm'
+                    'shell grid grid-cols-[1fr_auto_1fr] items-center gap-4 transition-[height] duration-500',
+                    transparent ? 'h-20 md:h-24' : 'h-16 md:h-20'
                 )}>
-                <div
-                    className={cn(
-                        'shell flex items-center gap-4 transition-[height] duration-300 md:gap-9',
-                        scrolled ? 'h-16' : 'h-18 md:h-22'
-                    )}>
-                    {/* Left: the menu on small screens, then the house lockup. */}
+                {/* Left: the menu on small screens, then the house lockup. */}
+                <div className="flex items-center gap-3">
                     <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
                         <SheetTrigger
                             render={
                                 <button
                                     type="button"
                                     aria-label="Open menu"
-                                    className="-m-1 p-1 text-cocoa-700 md:hidden"
+                                    className="-m-1 p-1 text-cocoa-700 transition-colors hover:text-cocoa-950 lg:hidden"
                                 />
                             }>
                             <Menu className="size-5" strokeWidth={1.5} />
@@ -139,14 +147,14 @@ export default function Header() {
                                 <Link
                                     href={homeHref}
                                     onClick={() => setMobileOpen(false)}
-                                    className="flex items-center gap-2.5 text-cocoa-900">
-                                    <BrandMark className="h-7 text-gold" />
-                                    <Wordmark className="!items-start" />
+                                    className="flex items-center gap-2.5 text-cocoa-950">
+                                    <BrandMark className="h-7 text-caramel" />
+                                    <Wordmark className="!items-start" tagline={null} />
                                 </Link>
                             </div>
 
                             <nav className="px-6 py-4" aria-label="Mobile">
-                                <ul className={cn(navItems.length > 0 && 'divide-y divide-border')}>
+                                <ul className="divide-y divide-border">
                                     {navItems.map((item) => (
                                         <li key={item.label}>
                                             <SheetClose
@@ -213,7 +221,7 @@ export default function Header() {
                                             render={
                                                 <Link
                                                     href={signUpHref}
-                                                    className="eyebrow flex h-12 items-center justify-center bg-cocoa-800 text-ivory transition-colors hover:bg-cocoa-900"
+                                                    className="eyebrow flex h-12 items-center justify-center bg-cocoa-950 text-ivory transition-colors hover:bg-cocoa-800"
                                                 />
                                             }>
                                             Create account
@@ -223,7 +231,7 @@ export default function Header() {
                                             render={
                                                 <Link
                                                     href={signInHref}
-                                                    className="eyebrow flex h-12 items-center justify-center border border-cocoa-800 text-cocoa-800 transition-colors hover:bg-cocoa-800 hover:text-ivory"
+                                                    className="eyebrow flex h-12 items-center justify-center border border-cocoa-950 text-cocoa-950 transition-colors hover:bg-cocoa-950 hover:text-ivory"
                                                 />
                                             }>
                                             Sign in
@@ -236,140 +244,147 @@ export default function Header() {
 
                     <Link
                         href={homeHref}
-                        className="flex shrink-0 items-center gap-2.5 text-cocoa-900"
+                        className="flex shrink-0 items-center gap-2.5 text-cocoa-950"
                         aria-label={signedIn ? 'Chococart shop' : 'Chococart home'}>
                         <BrandMark
                             className={cn(
-                                'text-gold transition-all duration-300',
-                                scrolled ? 'h-6' : 'h-6 md:h-7'
+                                'text-caramel transition-all duration-500',
+                                transparent ? 'h-6 md:h-7' : 'h-6'
                             )}
                         />
-                        <Wordmark
-                            className="!items-start"
-                            tagline={scrolled ? null : 'Artisan Chocolatier'}
-                        />
+                        <Wordmark className="!items-start" tagline={null} />
                     </Link>
+                </div>
 
-                    {/* Middle: the marketing nav, which is gone once signed in. */}
-                    <nav
-                        className={cn('hidden md:block', navItems.length === 0 && 'md:hidden')}
-                        aria-label="Main">
-                        <ul className="flex items-center gap-7 lg:gap-9">
-                            {navItems.map((item) => (
-                                <li key={item.label}>
-                                    <Link
-                                        href={item.href}
-                                        data-active={isActive(item.href)}
-                                        className="eyebrow link-grow whitespace-nowrap text-cocoa-600 transition-colors hover:text-cocoa-900 data-[active=true]:text-cocoa-900">
-                                        {item.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-
-                    {/* Right: account, and the bag once there is somewhere to send it. */}
-                    <div className="ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
-                        {isPending ? (
-                            <span
-                                aria-hidden="true"
-                                className="h-4 w-24 animate-pulse rounded bg-cocoa-100"
-                            />
-                        ) : signedIn ? (
-                            <>
+                {/* Middle: the house links signed out, the shelf signed in. */}
+                <nav className="hidden lg:block" aria-label="Main">
+                    <ul
+                        className={cn(
+                            'flex items-center',
+                            // Six types need to sit closer together than three
+                            // marketing links do.
+                            signedIn ? 'gap-6 xl:gap-7' : 'gap-8 lg:gap-10'
+                        )}>
+                        {navItems.map((item) => (
+                            <li key={item.label}>
                                 <Link
-                                    href="/shop"
-                                    aria-label="Search the collection"
-                                    className="-m-1 hidden p-1 text-cocoa-600 transition-colors hover:text-cocoa-900 sm:block">
-                                    <Search className="size-[1.05rem]" strokeWidth={1.5} />
+                                    href={item.href}
+                                    data-active={isActive(item.href)}
+                                    className="eyebrow link-grow whitespace-nowrap text-cocoa-600 transition-colors hover:text-cocoa-950 data-[active=true]:text-cocoa-950">
+                                    {item.label}
                                 </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
 
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger
-                                        render={
-                                            <button
-                                                type="button"
-                                                aria-label="Account menu"
-                                                className="eyebrow -m-1 flex items-center gap-2 rounded-full p-1 text-cocoa-600 transition-colors hover:text-cocoa-900"
-                                            />
-                                        }>
-                                        <Avatar className="size-7 ring-1 ring-cocoa-200 transition-shadow hover:ring-gold">
-                                            <AvatarImage
-                                                src={session?.user.image ?? undefined}
-                                                alt=""
-                                            />
-                                            <AvatarFallback className="bg-cocoa-100 text-[0.65rem] font-medium tracking-wide text-cocoa-700">
-                                                {initialsOf(displayName)}
-                                            </AvatarFallback>
-                                        </Avatar>
-                                        <span className="hidden lg:inline">Account</span>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent align="end" className="w-60">
-                                        {/* Base UI requires a Group around every GroupLabel. */}
-                                        <DropdownMenuGroup>
-                                            <DropdownMenuLabel className="flex items-center gap-2.5 px-1.5 py-2">
-                                                <Avatar className="size-8">
-                                                    <AvatarImage
-                                                        src={session?.user.image ?? undefined}
-                                                        alt=""
-                                                    />
-                                                    <AvatarFallback className="bg-cocoa-100 text-[0.7rem] font-medium text-cocoa-700">
-                                                        {initialsOf(displayName)}
-                                                    </AvatarFallback>
-                                                </Avatar>
-                                                <span className="min-w-0">
-                                                    <span className="block truncate text-[0.8rem] font-medium text-cocoa-800">
-                                                        {session?.user.name || 'Your account'}
-                                                    </span>
-                                                    <span className="block truncate text-[0.7rem] font-normal text-muted-foreground">
-                                                        {session?.user.email}
-                                                    </span>
+                {/* Right: signed in, search / account / bag. Signed out, the
+                    two ways to get an account. Pinned to the third column —
+                    below lg the nav is `display:none`, which drops it out of
+                    the grid entirely and would otherwise auto-place these in
+                    the middle track. */}
+                <div className="col-start-3 flex items-center justify-end gap-4 sm:gap-5">
+                    {isPending ? (
+                        <span
+                            aria-hidden="true"
+                            className="h-4 w-24 animate-pulse rounded bg-cocoa-200"
+                        />
+                    ) : signedIn ? (
+                        <>
+                            {/* Icons, not words: the bar already carries six
+                                type links, and three more labels beside them
+                                turns the whole thing into a wall of text. */}
+                            <Link
+                                href="/shop"
+                                aria-label="Search the collection"
+                                className="-m-1 flex items-center p-1 text-cocoa-600 transition-colors hover:text-cocoa-950">
+                                <Search className="size-[1.15rem]" strokeWidth={1.5} />
+                            </Link>
+
+                            <DropdownMenu>
+                                <DropdownMenuTrigger
+                                    render={
+                                        <button
+                                            type="button"
+                                            aria-label="Account menu"
+                                            className="-m-1 flex items-center p-1"
+                                        />
+                                    }>
+                                    <Avatar className="size-7 ring-1 ring-cocoa-200 transition-shadow hover:ring-caramel">
+                                        <AvatarImage
+                                            src={session?.user.image ?? undefined}
+                                            alt=""
+                                        />
+                                        <AvatarFallback className="bg-cream text-[0.65rem] font-medium tracking-wide text-cocoa-700">
+                                            {initialsOf(displayName)}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" className="w-60">
+                                    {/* Base UI requires a Group around every GroupLabel. */}
+                                    <DropdownMenuGroup>
+                                        <DropdownMenuLabel className="flex items-center gap-2.5 px-1.5 py-2">
+                                            <Avatar className="size-8">
+                                                <AvatarImage
+                                                    src={session?.user.image ?? undefined}
+                                                    alt=""
+                                                />
+                                                <AvatarFallback className="bg-cream text-[0.7rem] font-medium text-cocoa-700">
+                                                    {initialsOf(displayName)}
+                                                </AvatarFallback>
+                                            </Avatar>
+                                            <span className="min-w-0">
+                                                <span className="block truncate text-[0.8rem] font-medium text-cocoa-800">
+                                                    {session?.user.name || 'Your account'}
                                                 </span>
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem
-                                                nativeButton={false}
-                                                render={<Link href="/account/profile" />}>
-                                                <UserRound className="size-3.5" />
-                                                My profile
-                                            </DropdownMenuItem>
-                                            {/* Order history lives here rather than
-                                                in the bar — it is an account
-                                                errand, not a way to shop. */}
-                                            <DropdownMenuItem
-                                                nativeButton={false}
-                                                render={<Link href="/account/orders" />}>
-                                                <Package className="size-3.5" />
-                                                My orders
-                                            </DropdownMenuItem>
-                                        </DropdownMenuGroup>
+                                                <span className="block truncate text-[0.7rem] font-normal text-muted-foreground">
+                                                    {session?.user.email}
+                                                </span>
+                                            </span>
+                                        </DropdownMenuLabel>
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuItem onClick={handleSignOut}>
-                                            <LogOut className="size-3.5" />
-                                            Sign out
+                                        <DropdownMenuItem
+                                            nativeButton={false}
+                                            render={<Link href="/account/profile" />}>
+                                            <UserRound className="size-3.5" />
+                                            My profile
                                         </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+                                        {/* Order history lives here rather than
+                                            in the bar — it is an account errand,
+                                            not a way to shop. */}
+                                        <DropdownMenuItem
+                                            nativeButton={false}
+                                            render={<Link href="/account/orders" />}>
+                                            <Package className="size-3.5" />
+                                            My orders
+                                        </DropdownMenuItem>
+                                    </DropdownMenuGroup>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem onClick={handleSignOut}>
+                                        <LogOut className="size-3.5" />
+                                        Sign out
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
 
-                                {/* The bag belongs to people who can actually check out. */}
-                                <CartSheet />
-                            </>
-                        ) : pathname === '/signin' ? null : (
-                            <>
-                                <Link
-                                    href={signInHref}
-                                    className="eyebrow hidden text-cocoa-600 transition-colors hover:text-cocoa-900 sm:block">
-                                    Sign in
-                                </Link>
-                                <Link
-                                    href={signUpHref}
-                                    className="eyebrow flex items-center justify-center bg-cocoa-800 px-5 py-3 text-ivory transition-colors hover:bg-cocoa-900">
-                                    <span className="hidden sm:inline">Sign up</span>
-                                    <span className="sm:hidden">Sign in</span>
-                                </Link>
-                            </>
-                        )}
-                    </div>
+                            {/* The bag belongs to people who can check out. */}
+                            <CartSheet />
+                        </>
+                    ) : pathname === '/signin' ? null : (
+                        <>
+                            <Link
+                                href={signInHref}
+                                className="eyebrow hidden text-cocoa-600 transition-colors hover:text-cocoa-950 sm:block">
+                                Sign in
+                            </Link>
+                            <Link
+                                href={signUpHref}
+                                className="eyebrow flex items-center justify-center bg-cocoa-950 px-5 py-3 text-ivory transition-colors hover:bg-cocoa-800">
+                                <span className="hidden sm:inline">Sign up</span>
+                                <span className="sm:hidden">Sign in</span>
+                            </Link>
+                        </>
+                    )}
                 </div>
             </div>
         </header>

@@ -36,7 +36,7 @@ export default function CartSheet() {
                     <button
                         type="button"
                         aria-label={`Cart, ${count} item${count === 1 ? '' : 's'}`}
-                        className="relative -m-1 p-1 text-cocoa-600 transition-colors hover:text-cocoa-900"
+                        className="relative -m-1 flex items-center p-1 text-cocoa-600 transition-colors hover:text-cocoa-950"
                     />
                 }>
                 <ShoppingBag className="size-[1.15rem]" strokeWidth={1.5} />
@@ -49,7 +49,7 @@ export default function CartSheet() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.5, opacity: 0 }}
                             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                            className="tnum absolute -top-1.5 -right-2 grid size-[1.05rem] place-items-center rounded-full bg-cocoa-800 text-[0.6rem] font-semibold text-ivory">
+                            className="tnum absolute -top-1.5 -right-2 grid size-[1.05rem] place-items-center rounded-full bg-cocoa-950 text-[0.6rem] font-semibold text-ivory">
                             {count > 9 ? '9+' : count}
                         </motion.span>
                     )}

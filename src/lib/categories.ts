@@ -60,20 +60,85 @@ export function categoryLabel(value: string | null | undefined): string {
 export const noteLabel = (value: string): string => titleCase(value);
 
 /**
- * The house owns eight photographs, so a hundred chocolates have to share them.
- * Mapping by category at least keeps a white chocolate from wearing a dark
- * chocolate's portrait, and indexing by id keeps a product's picture stable
- * between renders and page loads.
+ * The house owns eight photographs, so fifty-odd chocolates have to share them.
+ * Mapping by category keeps a white chocolate from wearing a dark chocolate's
+ * portrait, and every pool is four deep — the widest the shop grid ever gets —
+ * so a row need never show the same picture twice.
  */
-const CATEGORY_IMAGES: Record<ProductCategory, string[]> = {
-    dark: ['/assets/product1.jpg', '/assets/chocolate.jpg', '/assets/choco-bg.jpg'],
-    milk: ['/assets/product2.jpg', '/assets/1720608785720.jpg'],
-    white: ['/assets/product3.jpg', '/assets/1721119564567.jpg'],
-    truffle: ['/assets/1720707243058.jpg', '/assets/product2.jpg'],
-    'gift-box': ['/assets/chocolate.jpg', '/assets/product3.jpg'],
+export const CATEGORY_IMAGES: Record<ProductCategory, string[]> = {
+    dark: [
+        '/assets/1720608785720.jpg',
+        '/assets/product1.jpg',
+        '/assets/product3.jpg',
+        '/assets/chocolate.jpg',
+    ],
+    milk: [
+        '/assets/1720707243058.jpg',
+        '/assets/chocolate.jpg',
+        '/assets/product2.jpg',
+        '/assets/choco-bg.jpg',
+    ],
+    white: [
+        '/assets/1721119564567.jpg',
+        '/assets/choco-bg.jpg',
+        '/assets/product2.jpg',
+        '/assets/product1.jpg',
+    ],
+    truffle: [
+        '/assets/choco-bg.jpg',
+        '/assets/1720707243058.jpg',
+        '/assets/product2.jpg',
+        '/assets/product1.jpg',
+    ],
+    'gift-box': [
+        '/assets/product1.jpg',
+        '/assets/product2.jpg',
+        '/assets/choco-bg.jpg',
+        '/assets/chocolate.jpg',
+    ],
 };
 
-export function imageForCategory(category: string, seed: number): string {
-    const pool = isProductCategory(category) ? CATEGORY_IMAGES[category] : CATEGORY_IMAGES.dark;
-    return pool[Math.abs(seed) % pool.length];
+/** How many neighbours a picture has to clear before it may appear again. */
+const REPEAT_WINDOW = 3;
+
+/**
+ * Deals photographs out to a run of chocolates **in the order they will be
+ * shown**, which is the only order that matters — walk the shop's featured
+ * listing, not the catalogue file, or the spread means nothing.
+ *
+ * A cursor per category works that type evenly through its own four pictures.
+ * The shared window then rejects anything already on screen nearby, which the
+ * cursors alone cannot do: the pools overlap, because slate and marble suit
+ * more than one type, so two categories can otherwise collide inside a row.
+ * Four deep against a window of three means no two of any four consecutive
+ * chocolates share a picture.
+ */
+export function createImageDealer() {
+    const cursors: Record<string, number> = {};
+    const recent: string[] = [];
+
+    return function nextImage(category: string): string {
+        const pool = isProductCategory(category)
+            ? CATEGORY_IMAGES[category]
+            : CATEGORY_IMAGES[DEFAULT_CATEGORY];
+        const cursor = cursors[category] ?? 0;
+
+        let chosen = pool[cursor % pool.length];
+        for (let step = 0; step < pool.length; step++) {
+            const candidate = pool[(cursor + step) % pool.length];
+            if (!recent.includes(candidate)) {
+                chosen = candidate;
+                cursors[category] = cursor + step + 1;
+                break;
+            }
+            // Every picture this type owns is already showing nearby: keep the
+            // cursor's own pick rather than leaving the pool.
+            if (step === pool.length - 1) cursors[category] = cursor + 1;
+        }
+
+        recent.push(chosen);
+        if (recent.length > REPEAT_WINDOW) recent.shift();
+
+        return chosen;
+    };
 }

@@ -14,7 +14,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "the-vegan-box-classic",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/product1.jpg"
   },
   {
     "name": "Pistachio Marzipan Truffles · Box of 4",
@@ -31,7 +31,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "pistachio-marzipan-truffles-box-of-4",
-    "image": "/assets/1720707243058.jpg"
+    "image": "/assets/choco-bg.jpg"
   },
   {
     "name": "75% Dark Papua New Guinea with Black Fig",
@@ -49,7 +49,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "75-dark-papua-new-guinea-with-black-fig",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/1720608785720.jpg"
   },
   {
     "name": "66% Dark Tanzania",
@@ -66,7 +66,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "66-dark-tanzania",
-    "image": "/assets/product1.jpg"
+    "image": "/assets/product3.jpg"
   },
   {
     "name": "55% Dark Ecuador with Orange Peel",
@@ -84,7 +84,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "55-dark-ecuador-with-orange-peel",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/chocolate.jpg"
   },
   {
     "name": "70% Dark Java with Espresso",
@@ -101,7 +101,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "70-dark-java-with-espresso",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/product1.jpg"
   },
   {
     "name": "30% White Belize with Raspberry Swirl",
@@ -120,7 +120,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "30-white-belize-with-raspberry-swirl",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/1721119564567.jpg"
   },
   {
     "name": "90% Dark Vietnam with Orange Peel",
@@ -138,7 +138,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "90-dark-vietnam-with-orange-peel",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/product3.jpg"
   },
   {
     "name": "The Tasting Flight Box · Classic",
@@ -155,7 +155,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "the-tasting-flight-box-classic",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/product2.jpg"
   },
   {
     "name": "34% Milk Dominican Republic with Hazelnut Praline",
@@ -173,7 +173,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "34-milk-dominican-republic-with-hazelnut-praline",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/1720707243058.jpg"
   },
   {
     "name": "45% Milk Madagascar with Toasted Rice",
@@ -192,7 +192,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "45-milk-madagascar-with-toasted-rice",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/chocolate.jpg"
   },
   {
     "name": "34% Milk Dominican Republic with Salted Caramel",
@@ -210,7 +210,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "34-milk-dominican-republic-with-salted-caramel",
-    "image": "/assets/1720608785720.jpg"
+    "image": "/assets/choco-bg.jpg"
   },
   {
     "name": "33% White Ghana with Lemon & Poppy",
@@ -229,7 +229,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "33-white-ghana-with-lemon-poppy",
-    "image": "/assets/1721119564567.jpg"
+    "image": "/assets/product2.jpg"
   },
   {
     "name": "85% Dark Dominican Republic with Espresso",
@@ -247,7 +247,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "85-dark-dominican-republic-with-espresso",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/1720608785720.jpg"
   },
   {
     "name": "42% Milk Vietnam",
@@ -265,7 +265,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "42-milk-vietnam",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/1720707243058.jpg"
   },
   {
     "name": "70% Dark Ecuador",
@@ -282,7 +282,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "70-dark-ecuador",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/product1.jpg"
   },
   {
     "name": "Hazelnut Praline Truffles · Box of 6",
@@ -318,7 +318,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "42-milk-belize-with-toasted-rice",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/chocolate.jpg"
   },
   {
     "name": "Coconut Rum Truffles · Box of 9",
@@ -334,7 +334,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "coconut-rum-truffles-box-of-9",
-    "image": "/assets/1720707243058.jpg"
+    "image": "/assets/choco-bg.jpg"
   },
   {
     "name": "45% Milk Madagascar with Cookie Crumb",
@@ -352,7 +352,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "45-milk-madagascar-with-cookie-crumb",
-    "image": "/assets/1720608785720.jpg"
+    "image": "/assets/1720707243058.jpg"
   },
   {
     "name": "66% Dark Venezuela with Espresso",
@@ -370,7 +370,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "66-dark-venezuela-with-espresso",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/product3.jpg"
   },
   {
     "name": "The Single Origin Box · Maison",
@@ -387,7 +387,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "the-single-origin-box-maison",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/chocolate.jpg"
   },
   {
     "name": "45% Milk Peru",
@@ -422,7 +422,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "78-dark-ecuador-with-roasted-almond",
-    "image": "/assets/product1.jpg"
+    "image": "/assets/1720608785720.jpg"
   },
   {
     "name": "75% Dark Vietnam with Freeze-Dried Raspberry",
@@ -457,7 +457,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "saffron-pistachio-truffles-box-of-12",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/1720707243058.jpg"
   },
   {
     "name": "82% Dark Nicaragua with Orange Peel",
@@ -475,7 +475,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "82-dark-nicaragua-with-orange-peel",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/product3.jpg"
   },
   {
     "name": "The Nut Lover Box · Grand",
@@ -491,7 +491,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "the-nut-lover-box-grand",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/product2.jpg"
   },
   {
     "name": "50% Milk Colombia with Malted Milk",
@@ -509,7 +509,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "50-milk-colombia-with-malted-milk",
-    "image": "/assets/1720608785720.jpg"
+    "image": "/assets/choco-bg.jpg"
   },
   {
     "name": "33% White Vietnam with Pistachio",
@@ -528,7 +528,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "33-white-vietnam-with-pistachio",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/product1.jpg"
   },
   {
     "name": "30% White Papua New Guinea with Coconut",
@@ -563,7 +563,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "78-dark-india-idukki-with-sea-salt",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/chocolate.jpg"
   },
   {
     "name": "42% Milk Vietnam with Hazelnut Praline",
@@ -582,7 +582,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "42-milk-vietnam-with-hazelnut-praline",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/1720707243058.jpg"
   },
   {
     "name": "82% Dark Ghana with Cacao Nib",
@@ -599,7 +599,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "82-dark-ghana-with-cacao-nib",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/1720608785720.jpg"
   },
   {
     "name": "55% Dark Uganda with Espresso",
@@ -617,7 +617,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "55-dark-uganda-with-espresso",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/product1.jpg"
   },
   {
     "name": "85% Dark Papua New Guinea with Espresso",
@@ -634,7 +634,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "85-dark-papua-new-guinea-with-espresso",
-    "image": "/assets/product1.jpg"
+    "image": "/assets/product3.jpg"
   },
   {
     "name": "38% Milk Brazil with Toasted Rice",
@@ -652,7 +652,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "38-milk-brazil-with-toasted-rice",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/chocolate.jpg"
   },
   {
     "name": "55% Dark Venezuela with Freeze-Dried Raspberry",
@@ -670,7 +670,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "55-dark-venezuela-with-freeze-dried-raspberry",
-    "image": "/assets/choco-bg.jpg"
+    "image": "/assets/1720608785720.jpg"
   },
   {
     "name": "The Dark Devotee Box · Maison",
@@ -686,7 +686,7 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "the-dark-devotee-box-maison",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/choco-bg.jpg"
   },
   {
     "name": "28% White Nicaragua with Coconut",
@@ -704,7 +704,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "28-white-nicaragua-with-coconut",
-    "image": "/assets/1721119564567.jpg"
+    "image": "/assets/product2.jpg"
   },
   {
     "name": "34% Milk Dominican Republic with Peanut Butter",
@@ -722,7 +722,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "34-milk-dominican-republic-with-peanut-butter",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/1720707243058.jpg"
   },
   {
     "name": "Blood Orange Truffles · Box of 12",
@@ -739,7 +739,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "blood-orange-truffles-box-of-12",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/product1.jpg"
   },
   {
     "name": "78% Dark Brazil with Chilli & Cinnamon",
@@ -757,7 +757,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "78-dark-brazil-with-chilli-cinnamon",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/product3.jpg"
   },
   {
     "name": "Earl Grey Truffles · Box of 24",
@@ -775,7 +775,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "earl-grey-truffles-box-of-24",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/choco-bg.jpg"
   },
   {
     "name": "66% Dark Ecuador with Orange Peel",
@@ -811,7 +811,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "30-white-peru",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/product1.jpg"
   },
   {
     "name": "62% Dark Peru with Black Fig",
@@ -828,7 +828,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "62-dark-peru-with-black-fig",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/1720608785720.jpg"
   },
   {
     "name": "34% Milk Tanzania with Salted Caramel",
@@ -847,7 +847,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "34-milk-tanzania-with-salted-caramel",
-    "image": "/assets/1720608785720.jpg"
+    "image": "/assets/product2.jpg"
   },
   {
     "name": "35% White Ghana with Raspberry Swirl",
@@ -866,7 +866,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "35-white-ghana-with-raspberry-swirl",
-    "image": "/assets/product3.jpg"
+    "image": "/assets/1721119564567.jpg"
   },
   {
     "name": "90% Dark Colombia with Orange Peel",
@@ -902,7 +902,7 @@
     "vegan": true,
     "glutenFree": true,
     "slug": "66-dark-java-with-candied-ginger",
-    "image": "/assets/chocolate.jpg"
+    "image": "/assets/product3.jpg"
   },
   {
     "name": "Yuzu Truffles · Box of 4",
@@ -937,7 +937,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "rose-raspberry-truffles-box-of-9",
-    "image": "/assets/1720707243058.jpg"
+    "image": "/assets/product2.jpg"
   },
   {
     "name": "45% Milk Venezuela with Peanut Butter",
@@ -955,7 +955,7 @@
     "vegan": false,
     "glutenFree": true,
     "slug": "45-milk-venezuela-with-peanut-butter",
-    "image": "/assets/product2.jpg"
+    "image": "/assets/choco-bg.jpg"
   },
   {
     "name": "90% Dark Venezuela with Espresso",
@@ -991,6 +991,6 @@
     "vegan": false,
     "glutenFree": false,
     "slug": "34-milk-uganda-with-malted-milk",
-    "image": "/assets/1720608785720.jpg"
+    "image": "/assets/1720707243058.jpg"
   }
 ]

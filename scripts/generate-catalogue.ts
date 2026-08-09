@@ -3,7 +3,7 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { FLAVOUR_NOTES, PRODUCT_CATEGORIES } from '../src/lib/categories';
+import { createImageDealer, FLAVOUR_NOTES, PRODUCT_CATEGORIES } from '../src/lib/categories';
 
 function rng(seed: number) {
     let a = seed;
@@ -125,13 +125,8 @@ const BOX_SIZES = [
     { label: 'Maison', pieces: 36, multiplier: 4.6 },
 ];
 
-const IMAGES: Record<string, string[]> = {
-    dark: ['/assets/product1.jpg', '/assets/chocolate.jpg', '/assets/choco-bg.jpg'],
-    milk: ['/assets/product2.jpg', '/assets/1720608785720.jpg'],
-    white: ['/assets/product3.jpg', '/assets/1721119564567.jpg'],
-    truffle: ['/assets/1720707243058.jpg', '/assets/product2.jpg'],
-    'gift-box': ['/assets/chocolate.jpg', '/assets/product3.jpg'],
-};
+/** Photographs are shared with the app, and dealt out after the shuffle. */
+const nextImage = createImageDealer();
 
 const WEIGHTS = [45, 70, 85, 100, 120];
 
@@ -212,7 +207,7 @@ function bars(category: 'dark' | 'milk' | 'white', cocoaLevels: number[]): Choco
                     vegan: category === 'dark' && !/Malted|Cookie/.test(inclusion.name),
                     glutenFree: !/Cookie|Toasted Rice|Malted/.test(inclusion.name),
                     slug: slugify(name),
-                    image: IMAGES[category][out.length % IMAGES[category].length],
+                    image: '', // dealt out after the shuffle below
                 });
             }
         }
@@ -242,7 +237,7 @@ function truffles(): Chocolate[] {
                 vegan: false,
                 glutenFree: !/Marzipan/.test(flavour.name),
                 slug: slugify(name),
-                image: IMAGES.truffle[out.length % IMAGES.truffle.length],
+                image: '', // dealt out after the shuffle below
             });
         }
     }
@@ -270,7 +265,7 @@ function giftBoxes(): Chocolate[] {
                 vegan: false,
                 glutenFree: false,
                 slug: slugify(name),
-                image: IMAGES['gift-box'][out.length % IMAGES['gift-box'].length],
+                image: '', // dealt out after the shuffle below
             });
         }
     }
@@ -320,6 +315,13 @@ for (const category of PRODUCT_CATEGORIES) {
 // Interleaved rather than grouped, so the default "featured" order and any
 // unfiltered page show a mix of types instead of four hundred dark bars.
 const ordered = shuffled(catalogue, 20260808);
+
+// Photographs are dealt out here rather than at generation time. The shuffle
+// above is what decides who ends up next to whom, and `imageFor`'s no-repeat
+// window only means anything measured against the final order.
+for (const chocolate of ordered) {
+    chocolate.image = nextImage(chocolate.category);
+}
 
 const target = join(import.meta.dirname, '..', 'src', 'data', 'chocolates.json');
 writeFileSync(target, `${JSON.stringify(ordered, null, 2)}\n`);

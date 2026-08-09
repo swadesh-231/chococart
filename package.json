@@ -11,6 +11,7 @@
     "catalogue": "bun run scripts/generate-catalogue.ts",
     "seed": "bun run scripts/seed.ts",
     "refresh-images": "bun run scripts/refresh-images.ts",
+    "icons": "bun run scripts/generate-icons.ts",
     "prune": "bun run scripts/prune-catalogue.ts"
   },
   "dependencies": {
